@@ -83,7 +83,20 @@
 				                        </div>
 										<div class="form-group">
 				                            <label>Nama AM</label>
-				                            <input type="text" name="nama_am" class="form-control" required="">
+											<select type="text" id="nama_am_search" name="nama_am" class="form-control selectpicker" data-live-search="true" required=''>
+													<?php 
+													// Fetch Nomor_order
+													$nama_am_query = "SELECT * FROM tb_am";
+													$nama_am_data = mysqli_query($koneksi,$nama_am_query);
+													while($row = mysqli_fetch_assoc($nama_am_data) ){
+														
+														$nama_am = $row['nama_am'];
+														
+														// Option
+														echo "<option value='".$nama_am."' >".$nama_am."</option>";
+													}
+													?>
+													</select>
 				                        </div>
 										<div class="form-group">
 				                            <label>Nama Pelanggan</label>
@@ -135,7 +148,20 @@
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Order</label>
-				                            <input type="text" name="nomor_order" class="form-control" required="">
+											<select type="text" id="nomor_order" name="nomor_order" onchange="isi_otomatis()" class="form-control selectpicker"  data-live-search="true" required=''>
+													<?php 
+													// Fetch Nomor_order
+													$nomor_order_query = "SELECT * FROM tb_pelanggan";
+													$nomor_order_data = mysqli_query($koneksi,$nomor_order_query);
+													while($row = mysqli_fetch_assoc($nomor_order_data) ){
+														
+														$nomor_order = $row['nomor_order'];
+														
+														// Option
+														echo "<option value='".$nomor_order."' >".$nomor_order."</option>";
+													}
+													?>
+													</select>
 				                        </div>
 										<div class="form-group">
 				                            <label>Status Order</label>
@@ -328,6 +354,20 @@
 </div>
 <!-- Page Script -->
 <script>
+	// Experiment Autofill
+	function isi_otomatis(){
+                var nomor_order = $("#nomor_order").val();
+                $.ajax({
+                    url: 'mod_order/crud_order.php?pg=autofill',
+                    data:"nomor_order="+nomor_order ,
+                }).success(function (data) {
+                    var json = data,
+                    obj = JSON.parse(json);
+                    $('#nomor_order').val(obj.nomor_order);
+					$('#nama_pel').val(obj.nama_pel);
+                });
+            }
+
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);

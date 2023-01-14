@@ -333,10 +333,6 @@
 </div>
 <!-- Page Script -->
 <script>
-	// Select Search
-	$(function () {
-    $('select').selectpicker();
-	});
 
 	// Custom File Value
 	$(".custom-file-input").on("change", function() {
