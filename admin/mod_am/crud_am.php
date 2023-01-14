@@ -29,8 +29,8 @@ if ($pg == 'tambah') {
     echo $exec;
 }
 if ($pg == 'hapus') {
-    $npsn = $_POST['npsn'];
-    delete($koneksi, 'sekolah', ['npsn' => $npsn]);
+    $npsn = $_GET['id_am'];
+    delete($koneksi, 'tb_am', ['id_am' => $npsn]);
 }
 if ($pg == 'import') {
     if (isset($_FILES['file']['name'])) {
