@@ -58,23 +58,44 @@
 				            <div class="modal-content">
 				                <form id="form-tambah">
 				                    <div class="modal-header">
-				                        <h5 class="modal-title">Tambah Data Kontrak</h5>
+				                        <h5 class="modal-title">Tambah Data User</h5>
 				                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				                            <span aria-hidden="true">&times;</span>
 				                        </button>
 				                    </div>
 				                    <div class="modal-body">
 				                        <div class="form-group">
-				                            <label>No Order</label>
+				                            <label>Nama</label>
 				                            <input type="text" name="nama" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
-				                            <label>N</label>
-				                            <input type="number" name="nis" class="form-control" required="">
+				                            <label>Email</label>
+				                            <input type="email" name="email" class="form-control" required="">
 				                        </div>
-				                        <div class="form-group">
-				                            <label>NIK</label>
-				                            <input type="number" name="nik" class="form-control">
+										<div class="form-group">
+				                            <label>Username</label>
+				                            <input type="text" name="username" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Password</label>
+				                            <input type="password" name="password" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Phone</label>
+				                            <input type="text" name="phone" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Roles</label>
+				                            <!-- <input type="text" name="Roles" class="form-control" required=""> -->
+											<select name="Roles" id="" class="form-control" required=''>
+												<option value="Admin">Admin</option>
+												<option value="AM">AM</option>
+												<option value="Office">Office</option>
+											</select>
+				                        </div>
+										<div class="form-group">
+				                            <label>Photo</label>
+				                            <input type="text" name="photo" class="form-control" required="">
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
@@ -141,40 +162,25 @@
 									                            <input type="text" name="nama" class="form-control" value="<?= $user['nama'] ?>" readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NIS</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $user['nis'] ?>"readonly>
+									                            <label>Email</label>
+									                            <input type="email" name="email" class="form-control" value="<?= $user['email'] ?>"readonly>
+									                        </div>
+															<div class="form-group">
+									                            <label>Username</label>
+									                            <input type="email" name="username" class="form-control" value="<?= $user['username'] ?>"readonly>
+									                        </div>
+															
+									                        <div class="form-group">
+									                            <label>Phone</label>
+									                            <input type="text" name="phone" class="form-control" value="<?= $user['phone'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NISN</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $user['nisn'] ?>"readonly>
+									                            <label>Roles</label>
+									                            <input type="text" name="Roles" class="form-control" value="<?= $user['Roles'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $user['nik'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>KELAS</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['kelas'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>JURUSAN</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['jurusan'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TEMPAT LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['tempat_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TGL. LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['tgl_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>AGAMA</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['agama'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>ALAMAT</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $user['alamat'] ?>"readonly>
+									                            <label>Photo</label>
+									                            <input type="text" name="photo" class="form-control" value="<?= $user['photo'] ?>"readonly>
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
@@ -212,7 +218,7 @@
                 i++;
             });
             $.ajax({
-                url: "mod_siswa/crud_siswa.php?pg=hapusdaftar",
+                url: "mod_user/crud_user.php?pg=hapusdaftar",
                 data: "kode=" + id_array,
                 type: "POST",
                 success: function(respon) {
@@ -232,7 +238,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_siswa/crud_siswa.php?pg=tambah',
+            url: 'mod_user/crud_user.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
@@ -263,7 +269,7 @@
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'mod_siswa/crud_siswa.php?pg=import',
+            url: 'mod_user/crud_user.php?pg=import',
             data: new FormData(this),
             processData: false,
             contentType: false,
