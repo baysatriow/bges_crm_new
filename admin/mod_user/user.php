@@ -96,7 +96,7 @@
 										<div class="form-group">
 										<label >Photo</label>
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="customFile">
+											<input type="file" name="profile" class="custom-file-input" id="customFile">
 											<label class="custom-file-label" for="customFile">Choose file</label>
 										</div>
 				                        </div>
@@ -208,6 +208,12 @@
 </div>
 <!-- Page Script -->
 <script>
+	// Custom File Value
+	$(".custom-file-input").on("change", function() {
+		var fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);

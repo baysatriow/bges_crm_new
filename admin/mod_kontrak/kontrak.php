@@ -70,61 +70,102 @@
 				                        </div>
 				                        <div class="form-group">
 				                            <label>KB/SPK</label>
-				                            <input type="file" name="kb" class="form-control" required="">
+											<div class="custom-file">
+												<input type="file" name="kb" class="custom-file-input" id="site-logo" required="">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 				                        <div class="form-group">
 				                            <label>BA Renewals</label>
-				                            <input type="file" name="ba_ren" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="ba_ren" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BA DO</label>
-				                            <input type="file" name="ba_do" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="ba_do" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BASO</label>
-				                            <input type="file" name="baso" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="baso" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BA Penjelasan</label>
-				                            <input type="file" name="ba_pen" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="ba_pen" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>P0-P8</label>
-				                            <input type="file" name="po" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="po" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>KL/SP/WO</label>
-				                            <input type="file" name="kl" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="kl" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>SPH</label>
-				                            <input type="file" name="sph" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="sph" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>SKM</label>
-				                            <input type="file" name="skm" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="skm" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAA</label>
-				                            <input type="file" name="baa" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="baa" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAI</label>
-				                            <input type="file" name="bai" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="bai" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAUT</label>
-				                            <input type="file" name="baut" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="baut" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAST</label>
-				                            <input type="file" name="bast" class="form-control">
+											<div class="custom-file">
+												<input type="file" name="bast" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BARD</label>
-				                            <input type="file" name="bard" class="form-control">
+											<div class="custom-file">
+												<input type="file"name="bard" class="custom-file-input" id="site-logo">
+												<label class="custom-file-label">Choose File</label>
+											</div>
 				                        </div>
-										<div class="form-group">
 				                    </div>
 				                    <div class="modal-footer">
 				                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -278,6 +319,12 @@
 </div>
 <!-- Page Script -->
 <script>
+	// Custom File Value
+	$(".custom-file-input").on("change", function() {
+	var fileName = $(this).val().split("\\").pop();
+	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);
