@@ -66,7 +66,21 @@
 				                    <div class="modal-body">
 				                        <div class="form-group">
 				                            <label>No Order</label>
-				                            <input type="text" name="no_order" class="form-control" required="">
+											<select type="text" id="no_order_search" name="nomor_order" class="form-control selectpicker" data-live-search="true" required=''>
+													<?php 
+													// Fetch Nomor_order
+													$no_order_query = "SELECT * FROM tb_order";
+													$no_order_data = mysqli_query($koneksi,$no_order_query);
+													while($row = mysqli_fetch_assoc($no_order_data) ){
+														
+														$no_order = $row['no_order'];
+														
+														// Option
+														echo "<option value='".$no_order."' >".$no_order."</option>";
+													}
+													?>
+													</select>
+				                            <!-- <input type="text" name="no_order" class="form-control" required=""> -->
 				                        </div>
 				                        <div class="form-group">
 				                            <label>KB/SPK</label>
@@ -319,6 +333,11 @@
 </div>
 <!-- Page Script -->
 <script>
+	// Select Search
+	$(function () {
+    $('select').selectpicker();
+	});
+
 	// Custom File Value
 	$(".custom-file-input").on("change", function() {
 	var fileName = $(this).val().split("\\").pop();

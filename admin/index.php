@@ -32,6 +32,8 @@ if (isset($_SESSION['id_user'])) {
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../assets/css/atlantis.css">
+	<!-- Select From Dropdown Bootstrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="../assets/css/demo.css">
 	<!-- CSS TOASTR -->
@@ -202,6 +204,8 @@ if (isset($_SESSION['id_user'])) {
 	
 	<script src="../assets/js/core/popper.min.js"></script>
 	<script src="../assets/js/core/bootstrap.min.js"></script>
+	<!-- Select From Dropdown Bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 	<!-- jQuery UI -->
 	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	<script src="../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
