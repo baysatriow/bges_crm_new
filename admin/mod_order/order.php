@@ -20,9 +20,13 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
+					<?php 
+					if($user['level'] == "admin"){
+					?>
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button>
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+					<?php } ?>
 					<!-- Modal Area -->
 					<!-- Modal Import -->
 				    <div class="modal fade" id="importdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -58,23 +62,104 @@
 				            <div class="modal-content">
 				                <form id="form-tambah">
 				                    <div class="modal-header">
-				                        <h5 class="modal-title">Tambah Data Sekolah</h5>
+				                        <h5 class="modal-title">Tambah Data Order</h5>
 				                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				                            <span aria-hidden="true">&times;</span>
 				                        </button>
 				                    </div>
 				                    <div class="modal-body">
 				                        <div class="form-group">
-				                            <label>Nama</label>
-				                            <input type="text" name="nama" class="form-control" required="">
+				                            <label>Tanggal Input</label>
+				                            <input type="date" name="tgl_input" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
-				                            <label>NIS</label>
-				                            <input type="number" name="nis" class="form-control" required="">
+				                            <label>Segmen</label>
+				                            <!-- <input type="number" name="segmen" class="form-control" required=""> -->
+											<select name="segmen" id="" class="form-control" required=''>
+												<option value="DBS">DBS</option>
+												<option value="DGS">DGS</option>
+												<option value="DES">DES</option>
+											</select>
 				                        </div>
-				                        <div class="form-group">
-				                            <label>NIK</label>
-				                            <input type="number" name="nik" class="form-control">
+										<div class="form-group">
+				                            <label>Nama AM</label>
+				                            <input type="text" name="nama_am" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Nama Pelanggan</label>
+				                            <input type="text" name="nama_pel" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Layanan</label>
+				                            <input type="text" name="layanan" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Harga OTC</label>
+				                            <input type="text" name="hrg_otc" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Harga Monthly</label>
+				                            <input type="text" name="hrg_otc" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Status Layanan</label>
+				                            <input type="text" name="status_lyn" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Customer Account</label>
+				                            <input type="text" name="ca" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Customer Account Site</label>
+				                            <input type="text" name="ca_site" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Customer Account Nipnas</label>
+				                            <input type="text" name="ca_nipnas" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Billing Account</label>
+				                            <input type="text" name="ba" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Billing Account Site</label>
+				                            <input type="text" name="ba_site" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Nomor Quote</label>
+				                            <input type="text" name="nomor_quote" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Nomor Aggrement</label>
+				                            <input type="text" name="nomor_aggrement" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Nomor Order</label>
+				                            <input type="text" name="nomor_order" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Status Order</label>
+				                            <input type="text" name="status_order" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Date End Of Contract</label>
+				                            <input type="text" name="date_end" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Date Prov Of Contract</label>
+				                            <input type="text" name="date_prov" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Nomor Order Lama</label>
+				                            <input type="text" name="order_lama" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Sid</label>
+				                            <input type="text" name="sid" class="form-control" required="">
+				                        </div>
+										<div class="form-group">
+				                            <label>Keterangan</label>
+				                            <input type="text" name="ket" class="form-control" required="">
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
@@ -112,10 +197,11 @@
 									<th>Nomor Aggrement</th>
 									<th>Nomor Order</th>
 									<th>Status Order</th>
-									<th>Date Prov Contrac</th>
-									<th>Date End Contract</th>
-									<th>No Order Lama</th>
+									<th>Date End Of Contract</th>
+									<th>Date Prov of Contract</th>
+									<th>Nomor Order Lama</th>
 									<th>Sid</th>
+									<th>Keterangan</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -123,45 +209,47 @@
 								<?php
 		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am ");
 		                            $no = 0;
-		                            while ($order = mysqli_fetch_array($query)) {
+		                            while ($am = mysqli_fetch_array($query)) {
 		                                $no++;
 		                            ?>
 								<tr>
-									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_order'] ?>"></td>
+									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $am['id_am'] ?>"></td>
 									<td><?= $no; ?></td>
-									<td><?= $order['tgl_input'] ?></td>
-									<td><?= $order['segmen'] ?></td>
-									<td><?= $order['nama_am'] ?></td>
-									<td><?= $order['nama_pel'] ?></td>
-									<td><?= $order['layanan'] ?></td>
-									<td><?= $order['hrg_otc'] ?></td>
-									<td><?= $order['hrg_mountly'] ?></td>
-									<td><?= $order['status_lyn'] ?></td>
-									<td><?= $order['ca'] ?></td>
-									<td><?= $order['ca_site'] ?></td>
-									<td><?= $order['ca_nipnas'] ?></td>
-									<td><?= $order['ba'] ?></td>
-									<td><?= $order['ba_site'] ?></td>
-									<td><?= $order['nomor_quote'] ?></td>
-									<td><?= $order['nomor_aggre'] ?></td>
-									<td><?= $order['nomor_order'] ?></td>
-									<td><?= $order['status_order'] ?></td>
-									<td><?= $order['date_prov'] ?></td>
-									<td><?= $order['date_end'] ?></td>
-									<td><?= $order['order_lama'] ?></td>
-									<td><?= $order['sid'] ?></td>
-									<td><?= $order['ket'] ?></td>  
+									<td><?= $am['tgl_input'] ?></td>
+									<td><?= $am['segmen'] ?></td>
+									<td><?= $am['nama_am'] ?></td>
+									<td><?= $am['nama_pel'] ?></td>
+									<td><?= $am['layanan'] ?></td>
+									<td><?= $am['hrg_otc'] ?></td>
+									<td><?= $am['hrg_mountly'] ?></td>
+									<td><?= $am['status_lyn'] ?></td>
+									<td><?= $am['ca'] ?></td>
+									<td><?= $am['ca_site'] ?></td>
+									<td><?= $am['ca_nipnas'] ?></td>
+									<td><?= $am['ba'] ?></td>
+									<td><?= $am['ba_site'] ?></td>
+									<td><?= $am['nomor_quote'] ?></td>
+									<td><?= $am['nomor_aggre'] ?></td>
+									<td><?= $am['nomor_order'] ?></td>
+									<td><?= $am['status_order'] ?></td>
+									<td><?= $am['date_end'] ?></td>
+									<td><?= $am['date_prov'] ?></td>
+									<td><?= $am['order_lama'] ?></td>
+									<td><?= $am['sid'] ?></td>
+									<td><?= $am['ket'] ?></td>
 									<td>
-										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($order['id_order']) ?>"><i class="fas fa-info-circle"></i></button>
-										<!-- Modal Here -->
-										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($order['id_order']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
+										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
+										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+										<!-- Modal Details Here -->
+										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
 									                <form id="form-detail">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Siswa <b><?= $order['nama'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail AM <b><?= $am['nama_am'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
@@ -169,46 +257,56 @@
 									                    <div class="modal-body">
 									                        <div class="form-group">
 									                            <label>Nama</label>
-									                            <input type="text" name="nama" class="form-control" value="<?= $order['nama'] ?>" readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>NIS</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $order['nis'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>NISN</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $order['nisn'] ?>"readonly>
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>" readonly>
 									                        </div>
 									                        <div class="form-group">
 									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $order['nik'] ?>"readonly>
+									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>KELAS</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['kelas'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>JURUSAN</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['jurusan'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TEMPAT LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['tempat_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TGL. LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['tgl_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>AGAMA</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['agama'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>ALAMAT</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['alamat'] ?>"readonly>
+									                            <label>Segmen</label>
+									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>"readonly>
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
+									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+									                    </div>
+									                </form>
+									            </div>
+									        </div>
+									    </div>
+										<!-- Modal End -->
+
+										<!-- Modal Edit Here -->
+										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+									        <div class="modal-dialog" role="document">
+									            <div class="modal-content">
+									            	<!-- Desc -->
+									            	
+									                <form id="form-edit">
+									                    <div class="modal-header">
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit AM <b><?= $am['nama_am'] ?></b></h5>
+									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									                            <span aria-hidden="true">&times;</span>
+									                        </button>
+									                    </div>
+									                    <div class="modal-body">
+									                        <div class="form-group">
+																<input type="hidden" name="id_am" value="<?php echo $am['id_am'] ?>">
+									                            <label>Nama</label>
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>">
+									                        </div>
+									                        <div class="form-group">
+									                            <label>NIK</label>
+									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>">
+									                        </div>
+									                        <div class="form-group">
+									                            <label>Segmen</label>
+									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>">
+									                        </div>
+									                    </div>
+									                    <div class="modal-footer">
+															<button type="submit" class="btn btn-dark">Save</button>
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>
 									                </form>
@@ -243,17 +341,20 @@
                 i++;
             });
             $.ajax({
-                url: "mod_siswa/crud_siswa.php?pg=hapusdaftar",
+                url: "mod_order/crud_order.php?pg=hapusdaftar",
                 data: "kode=" + id_array,
                 type: "POST",
                 success: function(respon) {
+					
                     if (respon == 1) {
                         $("input.cekpilih:checked").each(function() {
                             $(this).parent().parent().remove('.cekpilih').animate({
                                 opacity: "hide"
                             }, "slow");
                         })
-                    }
+                    }setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
                 }
             });
             return false;
@@ -263,7 +364,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_siswa/crud_siswa.php?pg=tambah',
+            url: 'mod_order/crud_order.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
@@ -288,13 +389,42 @@
         });
         return false;
     });
+	$('#form-edit').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'mod_order/crud_order.php?pg=editdata',
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil diubah',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#editdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal diubah',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+        });
+        return false;
+    });
 
     //IMPORT FILE PENDUKUNG 
     $('#form-import').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'mod_siswa/crud_siswa.php?pg=import',
+            url: 'mod_order/crud_order.php?pg=import',
             data: new FormData(this),
             processData: false,
             contentType: false,
