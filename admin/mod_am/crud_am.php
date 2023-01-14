@@ -8,15 +8,14 @@ session_start();
 if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
-if ($pg == 'ubah') {
-    $status = (isset($_POST['status'])) ? 1 : 0;
+if ($pg == 'edit') {
     $data = [
-        'nama_sekolah' => $_POST['nama'],
-        'alamat' => $_POST['alamat'],
-        'status' => $status
+        'nama_am'          => $_POST['nama_am'],
+        'nik'           => $_POST['nik'],
+        'segmen'           => $_POST['segmen'],
     ];
-    $npsn = $_POST['npsn'];
-    $exec = update($koneksi, 'sekolah', $data, ['npsn' => $npsn]);
+    $id_am = $_POST['id_am'];
+    $exec = update($koneksi, 'tb_am', $data, ['id_am' => $id_am]);
     echo $exec;
 }
 if ($pg == 'tambah') {
@@ -28,30 +27,6 @@ if ($pg == 'tambah') {
     ];
     $exec = insert($koneksi, 'tb_am', $data);
     echo $exec;
-}
-if ($pg == 'grab_sekolah') {
-    $sekolah = $_POST['sekolah'];
-    $kecamatan = explode(':', $_POST['kecamatan']);
-    $kabupaten = explode(':', $_POST['kabupaten']);
-    $provinsi = explode(':', $_POST['provinsi']);
-    foreach ($sekolah as $sekolah) {
-        $data = explode(":", $sekolah);
-        $npsn = $data[0];
-        $nama = $data[1];
-        $data = [
-            'npsn'          => $npsn,
-            'nama_sekolah'   => $nama,
-            'status'         => 1,
-            'kecamatan'     => $kecamatan[1],
-            'kabupaten'     => $kabupaten[1],
-            'provinsi'     => $provinsi[1]
-        ];
-
-        $cek = rowcount($koneksi, 'sekolah', ['npsn' => $npsn]);
-        if ($cek == 0) {
-            $exec = insert($koneksi, 'sekolah', $data);
-        }
-    }
 }
 if ($pg == 'hapus') {
     $npsn = $_POST['npsn'];
@@ -173,91 +148,6 @@ if ($pg == 'import') {
     } else {
         echo "gagal";
     }
-}
-if ($pg == 'get_provinsi') {
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/index11.php";
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listProvinsi = $getData->listProvinsi($get);
-    curl_close($ch);
-
-    echo "<option value=''>Pilih Provinsi</option>";
-    foreach ($listProvinsi as $prov) {
-        echo "<option value='$prov[link]:$prov[prov_name]'>$prov[prov_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_kabupaten') {
-    $provinsi = $_POST['provinsi'];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $provinsi;
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listKabupaten = $getData->listKabupaten($get);
-    curl_close($ch);
-    print_r($listKabupaten);
-    echo "<option value=''>Pilih Kabupaten</option>";
-    foreach ($listKabupaten as $kab) {
-        echo "<option value='$kab[link]:$kab[kab_name]'>$kab[kab_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_kecamatan') {
-
-    $data = explode(':', $_POST['kabupaten']);
-    $kabupaten = $data[0];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $kabupaten;
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listKecamatan = $getData->listKecamatan($get);
-    curl_close($ch);
-    print_r($listKecamatan);
-    echo "<option value=''>Pilih Kecamatan</option>";
-    foreach ($listKecamatan as $kec) {
-        echo "<option value='$kec[link]:$kec[kec_name]'>$kec[kec_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_sekolah') {
-    $data = explode(':', $_POST['kec']);
-    $kec = $data[0];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $kec . "&level=3";
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listNpsn = $getData->listNpsn($get);
-    curl_close($ch);
-    echo "
-    <button type='submit' class='btn btn-primary float-right'>Ambil Data</button>
-    <div class='form-check form-check-inline'>
-    <label class='form-check-label'>
-    
-            <input class='form-check-input' type='checkbox'  id='checkAll'>Pilih Semua Sekolah
-
-    </label>
-    </div><br>";
-    foreach ($listNpsn as $sekolah) {
-        echo "
-        <div class='form-check form-check-inline'>
-        <label class='form-check-label'>
-        
-                <input class='form-check-input' type='checkbox' name='sekolah[]'  value='$sekolah[npsn]:$sekolah[nama_sekolah]'>$sekolah[npsn] - $sekolah[nama_sekolah]
-
-        </label>
-        </div><br>";
-    }
-    echo "<script>
-    $('#checkAll').click(function() {
-        $('input:checkbox').prop('checked', this.checked);
-    });
-    </script>";
-    unset($getData);
 }
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];

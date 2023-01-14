@@ -78,12 +78,12 @@
 				                        </div>
 				                        <div class="form-group">
 				                            <label>Segmen</label>
-											<!-- <select name="segmen" id="" class="form-control" required=''>
+											<select name="segmen" id="" class="form-control" required=''>
 												<option value="DBS">DBS</option>
 												<option value="DGS">DGS</option>
 												<option value="DES">DES</option>
-											</select> -->
-				                            <input type="text" name="segmen" class="form-control">
+											</select>
+				                    
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
@@ -125,9 +125,9 @@
 									<td><?= $am['segmen'] ?></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button type="button" id="btnedit" class="btn btn-warning btn-xs"><i class="fas fa-trash    "></i> Edit</button>
+										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
 										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
-										<!-- Modal Here -->
+										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
@@ -155,6 +155,44 @@
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
+									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+									                    </div>
+									                </form>
+									            </div>
+									        </div>
+									    </div>
+										<!-- Modal End -->
+
+										<!-- Modal Edit Here -->
+										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+									        <div class="modal-dialog" role="document">
+									            <div class="modal-content">
+									            	<!-- Desc -->
+									            	
+									                <form id="form-edit">
+									                    <div class="modal-header">
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit AM <b><?= $am['nama_am'] ?></b></h5>
+									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									                            <span aria-hidden="true">&times;</span>
+									                        </button>
+									                    </div>
+									                    <div class="modal-body">
+									                        <div class="form-group">
+																<input type="hidden" name="id_am" value="<?php echo $am['id_am'] ?>">
+									                            <label>Nama</label>
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>">
+									                        </div>
+									                        <div class="form-group">
+									                            <label>NIK</label>
+									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>">
+									                        </div>
+									                        <div class="form-group">
+									                            <label>Segmen</label>
+									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>">
+									                        </div>
+									                    </div>
+									                    <div class="modal-footer">
+															<button type="submit" class="btn btn-dark">Save</button>
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>
 									                </form>
@@ -229,6 +267,35 @@
                     iziToast.error({
                         title: 'Maaf!',
                         message: 'Data Gagal ditambahkan',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+        });
+        return false;
+    });
+	$('#form-edit').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'mod_am/crud_am.php?pg=editdata',
+            data: $(this).serialize(),
+            success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil diubah',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#editdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal diubah',
                         position: 'topRight'
                     });
                 }
