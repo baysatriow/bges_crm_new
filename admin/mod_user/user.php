@@ -94,8 +94,11 @@
 											</select>
 				                        </div>
 										<div class="form-group">
-				                            <label>Photo</label>
-				                            <input type="text" name="photo" class="form-control" required="">
+										<label >Photo</label>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="customFile">
+											<label class="custom-file-label" for="customFile">Choose file</label>
+										</div>
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
