@@ -56,7 +56,7 @@
 				    <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 				        <div class="modal-dialog" role="document">
 				            <div class="modal-content">
-				                <form id="form-tambah">
+				                <form id="form-tambah" enctype='multipart/form-data'>
 				                    <div class="modal-header">
 				                        <h5 class="modal-title">Tambah Data User</h5>
 				                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -95,6 +95,7 @@
 				                        </div>
 										<div class="form-group">
 										<label >Photo</label>
+				                            <!-- <input type="text" name="photo" class="form-control" required=""> -->
 										<div class="custom-file">
 											<input type="file" name="profile" class="custom-file-input" id="customFile">
 											<label class="custom-file-label" for="customFile">Choose file</label>
@@ -243,12 +244,20 @@
             return false;
         })
     });
-	$('#form-tambah').submit(function(e) {
+	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_user/crud_user.php?pg=tambah',
-            data: $(this).serialize(),
+            url: 'mod_user/crud_user.php?pg=tambah_aja',
+			data: new FormData(this),
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function() {
+                $('form button').on("click", function(e) {
+                    e.preventDefault();
+                });
+            },
             success: function(data) {
                 if (data == 'OK') {
                     iziToast.success({

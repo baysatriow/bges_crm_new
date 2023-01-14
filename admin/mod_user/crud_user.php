@@ -27,10 +27,55 @@ if ($pg == 'tambah') {
         'password'      => password_hash($_POST['password'],PASSWORD_DEFAULT),
         'phone'         => $_POST['phone'],
         'Roles'         => $_POST['Roles'],
-        'photo'         => $_POST['photo'],
+        'photo'         => $_POST['photo'],    
     ];
     $exec = insert($koneksi, 'tb_user', $data);
     echo $exec;
+}
+if ($pg == 'tambah_aja') {
+    $data = [
+        'nama'          => $_POST['nama'],
+        'email'         => $_POST['email'],
+        'username'      => $_POST['username'],
+        'password'      => password_hash($_POST['password'],PASSWORD_DEFAULT),
+        'phone'         => $_POST['phone'],
+        'Roles'         => $_POST['Roles'],
+    ];
+    $exec = insert($koneksi, 'tb_user', $data);
+    echo mysqli_error($koneksi);
+    if ($exec) {
+        $ektensi = ['jpg', 'png'];
+        if ($_FILES['profile']['name'] <> '') {
+            $profile = $_FILES['profile']['name'];
+            $temp = $_FILES['profile']['tmp_name'];
+            $ext = explode('.', $profile);
+            $ext = end($ext);
+            if (in_array($ext, $ektensi)) {
+                $dest = 'assets/img/profile/profile' . rand(1, 1000) . '.' . $ext;
+                $upload = move_uploaded_file($temp, '../../' . $dest);
+                if ($upload) {
+                    $data2 = [
+                        'profile' => $dest
+                    ];
+                    $exec = insert($koneksi, 'tb_user', $data2);
+                } else {
+                    echo "gagal";
+                }
+            }
+        }
+        // if ($_FILES['ttd']['name'] <> '') {
+        //     $profile = $_FILES['ttd']['name'];
+        //     $temp = $_FILES['ttd']['tmp_name'];
+        //     $ext = explode('.', $profile);
+        //     $ext = end($ext);
+        //     if (in_array($ext, $ektensi)) {
+        //         $dest = 'dist/img/ttd' . '.' . $ext;
+        //         $upload = move_uploaded_file($temp, '../' . $dest);
+        //     }
+        // }
+    } else {
+        echo "Gagal menyimpan";
+    }
 }
 if ($pg == 'hapus') {
     $npsn = $_POST['npsn'];
