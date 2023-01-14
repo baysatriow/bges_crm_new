@@ -21,17 +21,24 @@ if ($pg == 'ubah') {
 }
 if ($pg == 'tambah') {
     $data = [
-        'nama'          => $_POST['nama'],
-        'nis'           => $_POST['nis'],
-        'nik'           => $_POST['nik'],
-        'status'        => 1
+        'no_order'      => $_POST['no_order'],
+        'kb'            => $_POST['kb'],
+        'ba_ren'        => $_POST['ba_ren'],
+        'ba_do'         => $_POST['ba_do'],
+        'baso'          => $_POST['baso'],
+        'ba_pen'        => $_POST['ba_pen'],
+        'po'            => $_POST['po'],
+        'kl'            => $_POST['kl'],
+        'sph'           => $_POST['sph'],
+        'skm'           => $_POST['skm'],
+        'baa'           => $_POST['baa'],
+        'bai'           => $_POST['bai'],
+        'baut'          => $_POST['baut'],
+        'bast'          => $_POST['bast'],
+        'bard'          => $_POST['bard'],
     ];
-    $exec = insert($koneksi, 'daftar', $data);
+    $exec = insert($koneksi, 'tb_kontrak', $data);
     echo $exec;
-}
-if ($pg == 'hapus') {
-    $npsn = $_POST['npsn'];
-    delete($koneksi, 'sekolah', ['npsn' => $npsn]);
 }
 if ($pg == 'import') {
     if (isset($_FILES['file']['name'])) {
@@ -152,7 +159,7 @@ if ($pg == 'import') {
 }
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
-    $query = mysqli_query($koneksi, "DELETE from daftar where id_daftar in (" . $kode . ")");
+    $query = mysqli_query($koneksi, "DELETE from tb_kontrak where id_kontrak in (" . $kode . ")");
     if ($query) {
         echo 1;
     } else {

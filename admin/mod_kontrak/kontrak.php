@@ -66,63 +66,63 @@
 				                    <div class="modal-body">
 				                        <div class="form-group">
 				                            <label>No Order</label>
-				                            <input type="text" name="nama" class="form-control" required="">
+				                            <input type="text" name="no_order" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
 				                            <label>KB/SPK</label>
-				                            <input type="file" name="nis" class="form-control" required="">
+				                            <input type="file" name="kb" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
 				                            <label>BA Renewals</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="ba_ren" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BA DO</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="ba_do" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BASO</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="baso" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BA Penjelasan</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="ba_pen" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>P0-P8</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="po" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>KL/SP/WO</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="kl" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>SPH</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="sph" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>SKM</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="skm" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BAA</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="baa" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BAI</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="bai" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BAUT</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="baut" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BAST</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="bast" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>BARD</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="file" name="bard" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                    </div>
@@ -197,51 +197,63 @@
 									            	
 									                <form id="form-detail">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Siswa <b><?= $kontrak['nama'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
 									                    </div>
 									                    <div class="modal-body">
 									                        <div class="form-group">
-									                            <label>Nama</label>
-									                            <input type="text" name="nama" class="form-control" value="<?= $kontrak['nama'] ?>" readonly>
+									                            <label>No Order</label>
+									                            <input type="text" name="no_order" class="form-control" value="<?= $kontrak['no_order'] ?>" readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NIS</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $kontrak['nis'] ?>"readonly>
+									                            <label>KB/SPK</label>
+									                            <input type="text" name="kb" class="form-control" value="<?= $kontrak['kb'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NISN</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $kontrak['nisn'] ?>"readonly>
+									                            <label>BA Renewals</label>
+									                            <input type="text" name="ba_ren" class="form-control" value="<?= $kontrak['ba_ren'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $kontrak['nik'] ?>"readonly>
+									                            <label>BA DO</label>
+									                            <input type="text" name="ba_do" class="form-control" value="<?= $kontrak['ba_do'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>KELAS</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['kelas'] ?>"readonly>
+									                            <label>BASO</label>
+									                            <input type="text" name="baso" class="form-control" value="<?= $kontrak['baso'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>JURUSAN</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['jurusan'] ?>"readonly>
+									                            <label>BA Penjelasan</label>
+									                            <input type="text" name="ba_pen" class="form-control" value="<?= $kontrak['ba_pen'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>TEMPAT LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['tempat_lahir'] ?>"readonly>
+									                            <label>P0-P8</label>
+									                            <input type="text" name="po" class="form-control" value="<?= $kontrak['po'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>TGL. LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['tgl_lahir'] ?>"readonly>
+									                            <label>KL/SP/WO</label>
+									                            <input type="text" name="kl" class="form-control" value="<?= $kontrak['kl'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>AGAMA</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['agama'] ?>"readonly>
+									                            <label>SPH</label>
+									                            <input type="text" name="sph" class="form-control" value="<?= $kontrak['sph'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>ALAMAT</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $kontrak['alamat'] ?>"readonly>
+									                            <label>BAA</label>
+									                            <input type="text" name="baa" class="form-control" value="<?= $kontrak['baa'] ?>"readonly>
+									                        </div>
+															<div class="form-group">
+									                            <label>BAI</label>
+									                            <input type="text" name="bai" class="form-control" value="<?= $kontrak['baut'] ?>"readonly>
+									                        </div>
+															<div class="form-group">
+									                            <label>BAST</label>
+									                            <input type="text" name="bast" class="form-control" value="<?= $kontrak['bast'] ?>"readonly>
+									                        </div>
+															<div class="form-group">
+									                            <label>BARD</label>
+									                            <input type="text" name="bard" class="form-control" value="<?= $kontrak['bard'] ?>"readonly>
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
@@ -279,7 +291,7 @@
                 i++;
             });
             $.ajax({
-                url: "mod_siswa/crud_siswa.php?pg=hapusdaftar",
+                url: "mod_kontrak/crud_kontrak.php?pg=hapusdaftar",
                 data: "kode=" + id_array,
                 type: "POST",
                 success: function(respon) {
@@ -299,7 +311,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_siswa/crud_siswa.php?pg=tambah',
+            url: 'mod_kontrak/crud_kontrak.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
@@ -330,7 +342,7 @@
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'mod_siswa/crud_siswa.php?pg=import',
+            url: 'mod_kontrak/crud_kontrak.php?pg=import',
             data: new FormData(this),
             processData: false,
             contentType: false,
