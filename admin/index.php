@@ -231,7 +231,7 @@ if (isset($_SESSION['id_user'])) {
     </script>
 	<script >
 		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
+			$('#basic-datatables1').DataTable({
 			});
 
 			// $('#basic-datatables2').DataTable({

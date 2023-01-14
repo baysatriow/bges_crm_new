@@ -90,7 +90,7 @@
 				<div class="card-body">
 					<!-- Tabel Start -->
 					<div class="table-responsive">
-						<table id="basic-datatables" class="display table table-striped table-hover" >
+						<table id="basic-datatables1" class="display table table-striped table-hover" >
 							<thead>
 								<tr>
 									<th><input type='checkbox' id='ceksemua'></th>

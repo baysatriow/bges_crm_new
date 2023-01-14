@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or die("ip anda sudah tercatat oleh sistem kami") ?>
 <div class="page-inner">
 	<div class="page-header">
-		<h4 class="page-title">Data Order</h4>
+		<h4 class="page-title">Data Account Manager</h4>
 		<ul class="breadcrumbs">
 			<li class="nav-home">
 				<a href=".">
@@ -12,7 +12,7 @@
 				<i class="flaticon-right-arrow"></i>
 			</li>
 			<li class="nav-item">
-				<a href="?pg=siswa">Data Order</a>
+				<a href="?pg=siswa">Data Account Manager</a>
 			</li>
 		</ul>
 	</div>
@@ -20,9 +20,13 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
+					<?php 
+					if($user['level'] == "admin"){
+					?>
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button>
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+					<?php } ?>
 					<!-- Modal Area -->
 					<!-- Modal Import -->
 				    <div class="modal fade" id="importdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -58,23 +62,28 @@
 				            <div class="modal-content">
 				                <form id="form-tambah">
 				                    <div class="modal-header">
-				                        <h5 class="modal-title">Tambah Data Sekolah</h5>
+				                        <h5 class="modal-title">Tambah Data AM</h5>
 				                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				                            <span aria-hidden="true">&times;</span>
 				                        </button>
 				                    </div>
 				                    <div class="modal-body">
 				                        <div class="form-group">
-				                            <label>Nama</label>
-				                            <input type="text" name="nama" class="form-control" required="">
-				                        </div>
-				                        <div class="form-group">
-				                            <label>NIS</label>
-				                            <input type="number" name="nis" class="form-control" required="">
+				                            <label>Nama AM</label>
+				                            <input type="text" name="nama_am" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
 				                            <label>NIK</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="number" name="nik" class="form-control" required="">
+				                        </div>
+				                        <div class="form-group">
+				                            <label>Segmen</label>
+											<!-- <select name="segmen" id="" class="form-control" required=''>
+												<option value="DBS">DBS</option>
+												<option value="DGS">DGS</option>
+												<option value="DES">DES</option>
+											</select> -->
+				                            <input type="text" name="segmen" class="form-control">
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
@@ -120,14 +129,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php
+							<?php
 		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am ");
 		                            $no = 0;
 		                            while ($order = mysqli_fetch_array($query)) {
 		                                $no++;
 		                            ?>
 								<tr>
-									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_order'] ?>"></td>
+								<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_order'] ?>"></td>
 									<td><?= $no; ?></td>
 									<td><?= $order['tgl_input'] ?></td>
 									<td><?= $order['segmen'] ?></td>
@@ -152,16 +161,18 @@
 									<td><?= $order['sid'] ?></td>
 									<td><?= $order['ket'] ?></td>  
 									<td>
-										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($order['id_order']) ?>"><i class="fas fa-info-circle"></i></button>
+										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
+										<button type="button" id="btnedit" class="btn btn-warning btn-xs"><i class="fas fa-trash    "></i> Edit</button>
+										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
 										<!-- Modal Here -->
-										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($order['id_order']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
 									                <form id="form-detail">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Siswa <b><?= $order['nama'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail AM <b><?= $am['nama_am'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
@@ -169,43 +180,15 @@
 									                    <div class="modal-body">
 									                        <div class="form-group">
 									                            <label>Nama</label>
-									                            <input type="text" name="nama" class="form-control" value="<?= $order['nama'] ?>" readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>NIS</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $order['nis'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>NISN</label>
-									                            <input type="number" name="nis" class="form-control" value="<?= $order['nisn'] ?>"readonly>
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>" readonly>
 									                        </div>
 									                        <div class="form-group">
 									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $order['nik'] ?>"readonly>
+									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
-									                            <label>KELAS</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['kelas'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>JURUSAN</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['jurusan'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TEMPAT LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['tempat_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>TGL. LAHIR</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['tgl_lahir'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>AGAMA</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['agama'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>ALAMAT</label>
-									                            <input type="text" name="nik" class="form-control" value="<?= $order['alamat'] ?>"readonly>
+									                            <label>Segmen</label>
+									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>"readonly>
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
@@ -243,17 +226,20 @@
                 i++;
             });
             $.ajax({
-                url: "mod_siswa/crud_siswa.php?pg=hapusdaftar",
+                url: "mod_am/crud_am.php?pg=hapusdaftar",
                 data: "kode=" + id_array,
                 type: "POST",
                 success: function(respon) {
+					
                     if (respon == 1) {
                         $("input.cekpilih:checked").each(function() {
                             $(this).parent().parent().remove('.cekpilih').animate({
                                 opacity: "hide"
                             }, "slow");
                         })
-                    }
+                    }setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
                 }
             });
             return false;
@@ -263,7 +249,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_siswa/crud_siswa.php?pg=tambah',
+            url: 'mod_am/crud_am.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
@@ -294,7 +280,7 @@
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'mod_siswa/crud_siswa.php?pg=import',
+            url: 'mod_am/crud_am.php?pg=import',
             data: new FormData(this),
             processData: false,
             contentType: false,
