@@ -56,7 +56,7 @@
 				    <div class="modal fade" id="tambahdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 				        <div class="modal-dialog" role="document">
 				            <div class="modal-content">
-				                <form id="form-tambah">
+				                <form id="form-tambah" enctype='multipart/form-data'>
 				                    <div class="modal-header">
 				                        <h5 class="modal-title">Tambah Data Kontrak</h5>
 				                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -66,7 +66,7 @@
 				                    <div class="modal-body">
 				                        <div class="form-group">
 				                            <label>No Order</label>
-											<select type="text" id="no_order_search" name="nomor_order" class="form-control selectpicker" data-live-search="true" required=''>
+											<select type="text" id="no_order_search" name="no_order" class="form-control selectpicker" data-live-search="true" required=''>
 													<?php 
 													// Fetch Nomor_order
 													$no_order_query = "SELECT * FROM tb_order";
@@ -85,98 +85,98 @@
 				                        <div class="form-group">
 				                            <label>KB/SPK</label>
 											<div class="custom-file">
-												<input type="file" name="kb" class="custom-file-input" id="site-logo" required="">
+												<input type="file" name="kb" class="custom-file-input" id="site-logo" required="" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 				                        <div class="form-group">
 				                            <label>BA Renewals</label>
 											<div class="custom-file">
-												<input type="file" name="ba_ren" class="custom-file-input" id="site-logo">
+												<input type="file" name="ba_ren" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BA DO</label>
 											<div class="custom-file">
-												<input type="file" name="ba_do" class="custom-file-input" id="site-logo">
+												<input type="file" name="ba_do" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BASO</label>
 											<div class="custom-file">
-												<input type="file" name="baso" class="custom-file-input" id="site-logo">
+												<input type="file" name="baso" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BA Penjelasan</label>
 											<div class="custom-file">
-												<input type="file" name="ba_pen" class="custom-file-input" id="site-logo">
+												<input type="file" name="ba_pen" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>P0-P8</label>
 											<div class="custom-file">
-												<input type="file" name="po" class="custom-file-input" id="site-logo">
+												<input type="file" name="po" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>KL/SP/WO</label>
 											<div class="custom-file">
-												<input type="file" name="kl" class="custom-file-input" id="site-logo">
+												<input type="file" name="kl" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>SPH</label>
 											<div class="custom-file">
-												<input type="file" name="sph" class="custom-file-input" id="site-logo">
+												<input type="file" name="sph" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>SKM</label>
 											<div class="custom-file">
-												<input type="file" name="skm" class="custom-file-input" id="site-logo">
+												<input type="file" name="skm" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAA</label>
 											<div class="custom-file">
-												<input type="file" name="baa" class="custom-file-input" id="site-logo">
+												<input type="file" name="baa" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAI</label>
 											<div class="custom-file">
-												<input type="file" name="bai" class="custom-file-input" id="site-logo">
+												<input type="file" name="bai" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAUT</label>
 											<div class="custom-file">
-												<input type="file" name="baut" class="custom-file-input" id="site-logo">
+												<input type="file" name="baut" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BAST</label>
 											<div class="custom-file">
-												<input type="file" name="bast" class="custom-file-input" id="site-logo">
+												<input type="file" name="bast" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
 										<div class="form-group">
 				                            <label>BARD</label>
 											<div class="custom-file">
-												<input type="file"name="bard" class="custom-file-input" id="site-logo">
+												<input type="file"name="bard" class="custom-file-input" id="site-logo" accept="Application/Pdf">
 												<label class="custom-file-label">Choose File</label>
 											</div>
 				                        </div>
@@ -369,12 +369,16 @@
             return false;
         })
     });
-	$('#form-tambah').submit(function(e) {
+
+	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_kontrak/crud_kontrak.php?pg=tambah',
-            data: $(this).serialize(),
+            url: 'mod_kontrak/crud_kontrak.php?pg=tambah_aja1',
+			data: new FormData(this),
+            processData: false,
+            contentType: false,
+            cache: false,
             success: function(data) {
                 if (data == 'OK') {
                     iziToast.success({

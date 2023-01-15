@@ -40,6 +40,110 @@ if ($pg == 'tambah') {
     $exec = insert($koneksi, 'tb_kontrak', $data);
     echo $exec;
 }
+if ($pg == 'tambah_aja') {
+    $data = [
+        'no_order'      => $_POST['no_order'],
+        'kb'            => $_FILES['kb']['name'],
+        'ba_ren'        => $_FILES['ba_ren']['name'],
+        'ba_do'         => $_FILES['ba_do']['name'],
+        'baso'          => $_FILES['baso']['name'],
+        'ba_pen'        => $_FILES['ba_pen']['name'],
+        'po'            => $_FILES['po']['name'],
+        'kl'            => $_FILES['kl']['name'],
+        'sph'           => $_FILES['sph']['name'],
+        'skm'           => $_FILES['skm']['name'],
+        'baa'           => $_FILES['baa']['name'],
+        'bai'           => $_FILES['bai']['name'],
+        'baut'          => $_FILES['baut']['name'],
+        'bast'          => $_FILES['bast']['name'],
+        'bard'          => $_FILES['bard']['name'],
+    ];
+
+    $ekstensi_diperbolehkan    = array('pdf');
+    $x        = explode('.', $nama_file);
+    $ekstensi    = strtolower(end($x));
+    $nama_file = $_FILES['kb']['name'];
+    $ukuran_file = $_FILES['kb']['size'];
+    $tipe_file = $_FILES['kb']['type'];
+    $tmp_file = $_FILES['kb']['tmp_name'];
+
+    $path = "../../assets/uploaded/files/".$nama_file;
+
+    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){ // Cek apakah tipe file yang diupload adalah JPG / JPEG / PNG
+        // Jika tipe file yang diupload JPG / JPEG / PNG, lakukan :
+        if($ukuran_file <= 1000000){ // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
+            // Jika ukuran file kurang dari sama dengan 1MB, lakukan :
+            // Proses upload
+            if(move_uploaded_file($tmp_file, $path)){ // Cek apakah gambar berhasil diupload atau tidak
+            // Jika gambar berhasil diupload, Lakukan :  
+            // Proses simpan ke Database
+                $exec = insert($koneksi, 'tb_kontrak', $data);
+                // echo $exec;
+            if($exec){ // Cek jika proses simpan ke database sukses atau tidak
+                // Jika Sukses, Lakukan :
+            }else{
+                // Jika Gagal, Lakukan :
+            }
+            }else{
+            // Jika gambar gagal diupload, Lakukan :
+            }
+        }else{
+            // Jika ukuran file lebih dari 1MB, lakukan :
+        }
+        }else{
+        // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+        }
+    // $exec = insert($koneksi, 'tb_user', $data);
+    // echo $exec;
+}
+
+if  ($pg == 'tambah_aja1'){
+     $data = [
+        'no_order'      => $_POST['no_order'],
+        'kb'            => $_FILES['kb']['name'],
+        'ba_ren'        => $_FILES['ba_ren']['name'],
+        'ba_do'         => $_FILES['ba_do']['name'],
+        'baso'          => $_FILES['baso']['name'],
+        'ba_pen'        => $_FILES['ba_pen']['name'],
+        'po'            => $_FILES['po']['name'],
+        'kl'            => $_FILES['kl']['name'],
+        'sph'           => $_FILES['sph']['name'],
+        'skm'           => $_FILES['skm']['name'],
+        'baa'           => $_FILES['baa']['name'],
+        'bai'           => $_FILES['bai']['name'],
+        'baut'          => $_FILES['baut']['name'],
+        'bast'          => $_FILES['bast']['name'],
+        'bard'          => $_FILES['bard']['name'],
+    ];
+    
+    $ekstensi_diperbolehkan    = array('pdf');
+    $nama    = $_FILES['kb']['name'];
+    $x        = explode('.', $nama);
+    $ekstensi    = strtolower(end($x));
+    $ukuran        = $_FILES['kb']['size'];
+    $file_tmp    = $_FILES['kb']['tmp_name']; 
+    
+    
+    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+        if($ukuran < 1044070){ 
+            move_uploaded_file($file_tmp, '../../assets/uploaded/files/'.$nama);
+            $exec = insert($koneksi, 'tb_kontrak', $data);
+            echo $exec;
+            if($exec){
+                // file berhasil di upload
+            }
+            else{
+            // Jika gagal di Upload
+            }
+        }
+        else{
+            // Jika file terlalu besar
+        }
+    }
+    else{
+        // Ekstensi tidak di dukung
+    }
+}
 if ($pg == 'import') {
     if (isset($_FILES['file']['name'])) {
         $file = $_FILES['file']['name'];

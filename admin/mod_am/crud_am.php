@@ -8,7 +8,7 @@ session_start();
 if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
-if ($pg == 'edit') {
+if ($pg == 'editdata') {
     $data = [
         'nama_am'          => $_POST['nama_am'],
         'nik'           => $_POST['nik'],
