@@ -224,6 +224,7 @@
 									<th>Nomor Order</th>
 									<th>Status Order</th>
 									<th>Date End Of Contract</th>
+									<th>Contract Remaining</th>
 									<th>Date Prov of Contract</th>
 									<th>Nomor Order Lama</th>
 									<th>Sid</th>
@@ -235,47 +236,84 @@
 								<?php
 		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am ");
 		                            $no = 0;
-		                            while ($am = mysqli_fetch_array($query)) {
+		                            while ($order = mysqli_fetch_array($query)) {
 		                                $no++;
 		                            ?>
 								<tr>
-									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $am['id_am'] ?>"></td>
+									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_am'] ?>"></td>
 									<td><?= $no; ?></td>
-									<td><?= $am['tgl_input'] ?></td>
-									<td><?= $am['segmen'] ?></td>
-									<td><?= $am['nama_am'] ?></td>
-									<td><?= $am['nama_pel'] ?></td>
-									<td><?= $am['layanan'] ?></td>
-									<td><?= $am['hrg_otc'] ?></td>
-									<td><?= $am['hrg_mountly'] ?></td>
-									<td><?= $am['status_lyn'] ?></td>
-									<td><?= $am['ca'] ?></td>
-									<td><?= $am['ca_site'] ?></td>
-									<td><?= $am['ca_nipnas'] ?></td>
-									<td><?= $am['ba'] ?></td>
-									<td><?= $am['ba_site'] ?></td>
-									<td><?= $am['nomor_quote'] ?></td>
-									<td><?= $am['nomor_aggre'] ?></td>
-									<td><?= $am['nomor_order'] ?></td>
-									<td><?= $am['status_order'] ?></td>
-									<td><?= $am['date_end'] ?></td>
-									<td><?= $am['date_prov'] ?></td>
-									<td><?= $am['order_lama'] ?></td>
-									<td><?= $am['sid'] ?></td>
-									<td><?= $am['ket'] ?></td>
+									<td><?= $order['tgl_input'] ?></td>
+									<td><?= $order['segmen'] ?></td>
+									<td><?= $order['nama_am'] ?></td>
+									<td><?= $order['nama_pel'] ?></td>
+									<td><?= $order['layanan'] ?></td>
+									<td><?= $order['hrg_otc'] ?></td>
+									<td><?= $order['hrg_mountly'] ?></td>
+									<td><?= $order['status_lyn'] ?></td>
+									<td><?= $order['ca'] ?></td>
+									<td><?= $order['ca_site'] ?></td>
+									<td><?= $order['ca_nipnas'] ?></td>
+									<td><?= $order['ba'] ?></td>
+									<td><?= $order['ba_site'] ?></td>
+									<td><?= $order['nomor_quote'] ?></td>
+									<td><?= $order['nomor_aggre'] ?></td>
+									<td><?= $order['nomor_order'] ?></td>
+									<td><?= $order['status_order'] ?></td>
+									<td><?= $order['date_end'] ?></td>
 									<td>
-										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
+                                                                                    
+									<?php
+										$today  = date_create('today'); // waktu sekarang
+										$tanggal = date_create($order['date_end']);
+
+										// tahun
+										$y = $today->diff($tanggal)->y;
+
+										// bulan
+										$m = $today->diff($tanggal)->m;
+
+										// hari
+										$d = $today->diff($tanggal)->d;
+										
+										$hasil = $y . " year " . $m . " month " . $d . " day";
+										$hasil2 = $m . " month " . $d . " day";
+										$hasil3 = $d . " day";
+
+										if ($today > $tanggal){
+											echo "<div class='badge badge-danger'>End</div>";
+										}else if($d < 1 ){
+											echo "<div class='badge badge-danger'>End</div>";
+										}else if ($m < 1){
+											echo $hasil3; 
+										}else if ($y < 1) {
+											echo $hasil2;
+										}else if($y >= 1) {
+											echo $hasil;
+										}
+										// $result = $today->format('Y-m-d');
+										// if($today > $tanggal){
+										// 	echo "hello";
+										// }
+																				?>
+										
+									</td>
+									<td><?= $order['date_prov'] ?></td>
+									<td><?= $order['order_lama'] ?></td>
+									<td><?= $order['sid'] ?></td>
+									<td><?= $order['ket'] ?></td>
+									<td>
+										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($order['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
+										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($order['id_am']) ?>"></i>Edit</button>
 										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
 										<!-- Modal Details Here -->
-										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($order['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
 									                <form id="form-detail">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail AM <b><?= $am['nama_am'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail AM <b><?= $order['nama_am'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
@@ -283,15 +321,15 @@
 									                    <div class="modal-body">
 									                        <div class="form-group">
 									                            <label>Nama</label>
-									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>" readonly>
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $order['nama_am'] ?>" readonly>
 									                        </div>
 									                        <div class="form-group">
 									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>"readonly>
+									                            <input type="number" name="nik" class="form-control" value="<?= $order['nik'] ?>"readonly>
 									                        </div>
 									                        <div class="form-group">
 									                            <label>Segmen</label>
-									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>"readonly>
+									                            <input type="text" name="segmen" class="form-control" value="<?= $order['segmen'] ?>"readonly>
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
@@ -304,31 +342,31 @@
 										<!-- Modal End -->
 
 										<!-- Modal Edit Here -->
-										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($order['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
 									                <form id="form-edit">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit AM <b><?= $am['nama_am'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit AM <b><?= $order['nama_am'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
 									                    </div>
 									                    <div class="modal-body">
 									                        <div class="form-group">
-																<input type="hidden" name="id_am" value="<?php echo $am['id_am'] ?>">
+																<input type="hidden" name="id_am" value="<?php echo $order['id_am'] ?>">
 									                            <label>Nama</label>
-									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>">
+									                            <input type="text" name="nama_am" class="form-control" value="<?= $order['nama_am'] ?>">
 									                        </div>
 									                        <div class="form-group">
 									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $am['nik'] ?>">
+									                            <input type="number" name="nik" class="form-control" value="<?= $order['nik'] ?>">
 									                        </div>
 									                        <div class="form-group">
 									                            <label>Segmen</label>
-									                            <input type="text" name="segmen" class="form-control" value="<?= $am['segmen'] ?>">
+									                            <input type="text" name="segmen" class="form-control" value="<?= $order['segmen'] ?>">
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
