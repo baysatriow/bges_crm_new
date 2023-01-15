@@ -19,6 +19,7 @@ if ($pg == 'ubah') {
     $exec = update($koneksi, 'sekolah', $data, ['npsn' => $npsn]);
     echo $exec;
 }
+// Config Lama Sebelum Upload Foto
 if ($pg == 'tambah') {
     $data = [
         'nama'          => $_POST['nama'],
@@ -40,42 +41,42 @@ if ($pg == 'tambah_aja') {
         'password'      => password_hash($_POST['password'],PASSWORD_DEFAULT),
         'phone'         => $_POST['phone'],
         'Roles'         => $_POST['Roles'],
+        'photo'         => $_FILES['profile']['name'],
     ];
-    $exec = insert($koneksi, 'tb_user', $data);
-    echo mysqli_error($koneksi);
-    if ($exec) {
-        $ektensi = ['jpg', 'png'];
-        if ($_FILES['profile']['name'] <> '') {
-            $profile = $_FILES['profile']['name'];
-            $temp = $_FILES['profile']['tmp_name'];
-            $ext = explode('.', $profile);
-            $ext = end($ext);
-            if (in_array($ext, $ektensi)) {
-                $dest = 'assets/img/profile/profile' . rand(1, 1000) . '.' . $ext;
-                $upload = move_uploaded_file($temp, '../../' . $dest);
-                if ($upload) {
-                    $data2 = [
-                        'profile' => $dest
-                    ];
-                    $exec = insert($koneksi, 'tb_user', $data2);
-                } else {
-                    echo "gagal";
-                }
+
+    $nama_file = $_FILES['profile']['name'];
+    $ukuran_file = $_FILES['profile']['size'];
+    $tipe_file = $_FILES['profile']['type'];
+    $tmp_file = $_FILES['profile']['tmp_name'];
+
+    $path = "../../assets/img/uploaded/profile/".$nama_file;
+
+    if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){ // Cek apakah tipe file yang diupload adalah JPG / JPEG / PNG
+        // Jika tipe file yang diupload JPG / JPEG / PNG, lakukan :
+        if($ukuran_file <= 1000000){ // Cek apakah ukuran file yang diupload kurang dari sama dengan 1MB
+            // Jika ukuran file kurang dari sama dengan 1MB, lakukan :
+            // Proses upload
+            if(move_uploaded_file($tmp_file, $path)){ // Cek apakah gambar berhasil diupload atau tidak
+            // Jika gambar berhasil diupload, Lakukan :  
+            // Proses simpan ke Database
+                $exec = insert($koneksi, 'tb_user', $data);
+                echo $exec;
+            if($exec){ // Cek jika proses simpan ke database sukses atau tidak
+                // Jika Sukses, Lakukan :
+            }else{
+                // Jika Gagal, Lakukan :
             }
+            }else{
+            // Jika gambar gagal diupload, Lakukan :
+            }
+        }else{
+            // Jika ukuran file lebih dari 1MB, lakukan :
         }
-        // if ($_FILES['ttd']['name'] <> '') {
-        //     $profile = $_FILES['ttd']['name'];
-        //     $temp = $_FILES['ttd']['tmp_name'];
-        //     $ext = explode('.', $profile);
-        //     $ext = end($ext);
-        //     if (in_array($ext, $ektensi)) {
-        //         $dest = 'dist/img/ttd' . '.' . $ext;
-        //         $upload = move_uploaded_file($temp, '../' . $dest);
-        //     }
-        // }
-    } else {
-        echo "Gagal menyimpan";
-    }
+        }else{
+        // Jika tipe file yang diupload bukan JPG / JPEG / PNG, lakukan :
+        }
+    // $exec = insert($koneksi, 'tb_user', $data);
+    // echo $exec;
 }
 if ($pg == 'hapus') {
     $npsn = $_POST['npsn'];

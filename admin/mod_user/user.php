@@ -144,7 +144,7 @@
 									<td><?= $user['username'] ?></td>
 									<td><?= $user['phone'] ?></td>
 									<td><?= $user['Roles'] ?></td>
-									<td><?= $user['photo'] ?></td>
+									<td><img src="../assets/img/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail"></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($user['id_user']) ?>"><i class="fas fa-info-circle"></i></button>
 										<!-- Modal Here -->
@@ -182,10 +182,12 @@
 									                            <label>Roles</label>
 									                            <input type="text" name="Roles" class="form-control" value="<?= $user['Roles'] ?>"readonly>
 									                        </div>
-									                        <div class="form-group">
-									                            <label>Photo</label>
-									                            <input type="text" name="photo" class="form-control" value="<?= $user['photo'] ?>"readonly>
-									                        </div>
+															<div class="form-group align-items-center">
+																<label class="form-control-label">Photo</label>
+																<div>
+																	<img src="../assets/img/uploaded/profile/<?= $user['photo'] ?>" class="img-thumbnail" width="500">
+																</div>
+															</div>
 									                    </div>
 									                    <div class="modal-footer">
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -253,11 +255,6 @@
             processData: false,
             contentType: false,
             cache: false,
-            beforeSend: function() {
-                $('form button').on("click", function(e) {
-                    e.preventDefault();
-                });
-            },
             success: function(data) {
                 if (data == 'OK') {
                     iziToast.success({
