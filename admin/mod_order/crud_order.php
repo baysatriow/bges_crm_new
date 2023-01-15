@@ -31,7 +31,7 @@ if ($pg == 'tambah') {
 
 if ($pg == 'autofill') {
     //variabel no_order yang dikirimkan form.php
-    $nomor_order = $_GET['nomor_order'];
+    $nomor_order = $_GET['order_lama'];
 
     //mengambil data
     $query = mysqli_query($koneksi, "select * from tb_pelanggan where nomor_order='$nomor_order'");

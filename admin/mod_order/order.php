@@ -148,7 +148,7 @@
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Order</label>
-											<select type="text" id="nomor_order" name="nomor_order" onchange="isi_otomatis()" class="form-control selectpicker"  data-live-search="true" required=''>
+											<select type="text" id="nomor_order" name="nomor_order" class="form-control selectpicker"  data-live-search="true" required=''>
 													<?php 
 													// Fetch Nomor_order
 													$nomor_order_query = "SELECT * FROM tb_pelanggan";
@@ -177,7 +177,7 @@
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Order Lama</label>
-				                            <input type="text" name="order_lama" class="form-control" required="">
+				                            <input type="text" name="order_lama"  onchange="isi_otomatis()" class="form-control" required="">
 				                        </div>
 										<div class="form-group">
 				                            <label>Sid</label>
@@ -356,14 +356,14 @@
 <script>
 	// Experiment Autofill
 	function isi_otomatis(){
-                var nomor_order = $("#nomor_order").val();
+                var order_lama = $("#order_lama").val();
                 $.ajax({
-                    url: 'mod_order/crud_order.php?pg=autofill',
-                    data:"nomor_order="+nomor_order ,
+                    url: "mod_order/crud_order.php?pg=autofill",
+                    data:"order_lama="+order_lama ,
                 }).success(function (data) {
                     var json = data,
                     obj = JSON.parse(json);
-                    $('#nomor_order').val(obj.nomor_order);
+                    $('#order_lama').val(obj.order_lama);
 					$('#nama_pel').val(obj.nama_pel);
                 });
             }
