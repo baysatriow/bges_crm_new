@@ -49,7 +49,7 @@ if ($pg == 'tambah_aja') {
     $tipe_file = $_FILES['profile']['type'];
     $tmp_file = $_FILES['profile']['tmp_name'];
 
-    $path = "../../assets/img/uploaded/profile/".$nama_file;
+    $path = "../../assets/uploaded/profile/".$nama_file;
 
     if($tipe_file == "image/jpeg" || $tipe_file == "image/png"){ // Cek apakah tipe file yang diupload adalah JPG / JPEG / PNG
         // Jika tipe file yang diupload JPG / JPEG / PNG, lakukan :

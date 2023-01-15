@@ -144,7 +144,7 @@
 									<td><?= $user['username'] ?></td>
 									<td><?= $user['phone'] ?></td>
 									<td><?= $user['Roles'] ?></td>
-									<td><img src="../assets/img/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail"></td>
+									<td><img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail"></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($user['id_user']) ?>"><i class="fas fa-info-circle"></i></button>
 										<!-- Modal Here -->
