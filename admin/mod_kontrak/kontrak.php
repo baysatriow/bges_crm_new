@@ -195,7 +195,7 @@
 					<!-- Tabel Start -->
 					<div class="table-responsive">
 						<table id="basic-datatables1" class="display table table-striped table-hover" >
-							<thead>
+							<thead align="center">
 								<tr>
 									<th><input type='checkbox' id='ceksemua'></th>
 									<th>#</th>
@@ -217,7 +217,7 @@
 									<th>Aksi</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody align="center">
 								<?php
 		                            $query = mysqli_query($koneksi, "select * from tb_kontrak");
 		                            $no = 0;
@@ -228,20 +228,158 @@
 									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $kontrak['id_kontrak'] ?>"></td>
 									<td><?= $no; ?></td>
 									<td><?= $kontrak['no_order'] ?></td>
-									<td><?= $kontrak['kb'] ?></td>
-									<td><?= $kontrak['ba_ren'] ?></td>
-									<td><?= $kontrak['ba_do'] ?></td>
-									<td><?= $kontrak['baso'] ?></td>
-									<td><?= $kontrak['ba_pen'] ?></td>
-									<td><?= $kontrak['po'] ?></td>
-									<td><?= $kontrak['kl'] ?></td>
-									<td><?= $kontrak['sph'] ?></td>
-									<td><?= $kontrak['skm'] ?></td>
-									<td><?= $kontrak['baa'] ?></td>
-									<td><?= $kontrak['bai'] ?></td>
-									<td><?= $kontrak['baut'] ?></td>
-									<td><?= $kontrak['bast'] ?></td>
-									<td><?= $kontrak['bard'] ?></td>
+									<td>                                            
+									<?php 
+										if ($kontrak['kb'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="../assets/uploaded/files/kb/<?= $kontrak['kb']?>"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+										
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['ba_ren'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#" data-toggle="modal" data-target="#detailfile&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+										<div class="modal fade bd-example-modal-lg" id="detailfile&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+														<embed src="../uploaded/files/kb<?=$kontrak['kb']?>" type="application/pdf">
+															<object data="../uploaded/test.pdf" type="application/pdf">
+																
+															</object>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									<td>
+									<?php 
+										if ($kontrak['ba_do'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['baso'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['ba_pen'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['po'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['kl'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['sph'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['skm'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['baa'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['bai'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['baut'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['bast'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+									<td>
+									<?php 
+										if ($kontrak['bard'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
 										<!-- Modal Here -->
@@ -294,13 +432,21 @@
 									                            <label>SPH</label>
 									                            <input type="text" name="sph" class="form-control" value="<?= $kontrak['sph'] ?>"readonly>
 									                        </div>
+															<div class="form-group">
+									                            <label>SKM</label>
+									                            <input type="text" name="skm" class="form-control" value="<?= $kontrak['skm'] ?>"readonly>
+									                        </div>
 									                        <div class="form-group">
 									                            <label>BAA</label>
 									                            <input type="text" name="baa" class="form-control" value="<?= $kontrak['baa'] ?>"readonly>
 									                        </div>
 															<div class="form-group">
 									                            <label>BAI</label>
-									                            <input type="text" name="bai" class="form-control" value="<?= $kontrak['baut'] ?>"readonly>
+									                            <input type="text" name="bai" class="form-control" value="<?= $kontrak['bai'] ?>"readonly>
+									                        </div>
+															<div class="form-group">
+									                            <label>BAUT</label>
+									                            <input type="text" name="baut" class="form-control" value="<?= $kontrak['baut'] ?>"readonly>
 									                        </div>
 															<div class="form-group">
 									                            <label>BAST</label>
@@ -332,8 +478,8 @@
 	</div>
 </div>
 <!-- Page Script -->
+<script></script>
 <script>
-
 	// Custom File Value
 	$(".custom-file-input").on("change", function() {
 	var fileName = $(this).val().split("\\").pop();
@@ -341,7 +487,7 @@
 	});
 
 	$('#ceksemua').change(function() {
-        $(this).parents('#basic-datatables:eq(0)').
+        $(this).parents('#basic-datatables1:eq(0)').
         find(':checkbox').attr('checked', this.checked);
     });
     $(function() {
@@ -374,7 +520,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_kontrak/crud_kontrak.php?pg=tambah_aja1',
+            url: 'mod_kontrak/crud_kontrak.php?pg=tambah',
 			data: new FormData(this),
             processData: false,
             contentType: false,
@@ -390,7 +536,13 @@
                         window.location.reload();
                     }, 2000);
                     $('#tambahdata').modal('hide');
-                } else {
+                } else if(data == 'Ukuran'){
+					iziToast.warning({
+                        title: 'Maaf!',
+                        message: 'Ukuran File Terlalu Besar',
+                        position: 'topRight'
+                    });
+				}else {
                     iziToast.error({
                         title: 'Maaf!',
                         message: 'Data Gagal ditambahkan',

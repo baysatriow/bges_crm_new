@@ -34,12 +34,14 @@ if ($pg == 'tambah') {
     echo $exec;
 }
 if ($pg == 'tambah_aja') {
+
     $data = [
         'nama'          => $_POST['nama'],
         'email'         => $_POST['email'],
         'username'      => $_POST['username'],
         'password'      => password_hash($_POST['password'],PASSWORD_DEFAULT),
         'phone'         => $_POST['phone'],
+        'level'         => $_POST['Roles'],
         'Roles'         => $_POST['Roles'],
         'photo'         => $_FILES['profile']['name'],
     ];
