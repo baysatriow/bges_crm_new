@@ -12,7 +12,7 @@
 				<i class="flaticon-right-arrow"></i>
 			</li>
 			<li class="nav-item">
-				<a href="?pg=siswa">Data Pelanggan</a>
+				<a href="?pg=pelanggan">Data Pelanggan</a>
 			</li>
 		</ul>
 	</div>
