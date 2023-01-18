@@ -20,7 +20,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button>
+					<!-- <button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button> -->
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
 					<!-- Modal Area -->
@@ -382,6 +382,8 @@
 									</td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
+										<a href=""></a>
+										<button type="button" id="hapusx" class="btn btn-dark btn-xs delbutton"><i class="fas fa-trash    "></i> Hapus</button>
 										<!-- Modal Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
@@ -490,6 +492,7 @@
         $(this).parents('#basic-datatables1:eq(0)').
         find(':checkbox').attr('checked', this.checked);
     });
+	// Hapus Menggunakan Checklist
     $(function() {
         $("#btnhapus").click(function() {
             id_array = new Array();
@@ -515,6 +518,24 @@
             return false;
         })
     });
+	// Hapus Menggunakan ID
+	$(function() {
+        $(document).on('click','#hapusx',function(){
+        var element = $(this);
+        var del_id = element.attr("id_kontrak");
+        var info = 'id=' + del_id;
+        if(confirm("Are you sure you want to delete this Record?")){
+            $.ajax({
+                type: "POST",
+                url: "mod_kontrak/crud_kontrak.php?pg=hapus",
+                data: info,
+                success: function(){  } 
+            });
+        }
+        return false;
+        });
+        });
+
 
 	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
