@@ -20,9 +20,18 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
+				<?php 
+					if($user['level'] == "admin"){
+					?>
 					<!-- <button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button> -->
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+					<?php }
+					else if($user['level'] == "office") {
+					?>
+					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
+					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+					<?php	} ?>
 					<!-- Modal Area -->
 					<!-- Modal Import -->
 				    <div class="modal fade" id="importdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -383,7 +392,7 @@
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
 										<a href=""></a>
-										<button type="button" id="hapusx" class="btn btn-dark btn-xs delbutton"><i class="fas fa-trash    "></i> Hapus</button>
+										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($kontrak['id_kontrak']) ?>')" >Hapus</button>
 										<!-- Modal Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
@@ -482,7 +491,8 @@
 <!-- Page Script -->
 <script></script>
 <script>
-	// Custom File Value
+
+	// Custom File Value 
 	$(".custom-file-input").on("change", function() {
 	var fileName = $(this).val().split("\\").pop();
 	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -492,6 +502,7 @@
         $(this).parents('#basic-datatables1:eq(0)').
         find(':checkbox').attr('checked', this.checked);
     });
+
 	// Hapus Menggunakan Checklist
     $(function() {
         $("#btnhapus").click(function() {
@@ -518,25 +529,37 @@
             return false;
         })
     });
-	// Hapus Menggunakan ID
-	$(function() {
-        $(document).on('click','#hapusx',function(){
-        var element = $(this);
-        var del_id = element.attr("id_kontrak");
-        var info = 'id=' + del_id;
-        if(confirm("Are you sure you want to delete this Record?")){
-            $.ajax({
-                type: "POST",
-                url: "mod_kontrak/crud_kontrak.php?pg=hapus",
-                data: info,
-                success: function(){  } 
-            });
-        }
-        return false;
-        });
-        });
 
+	// Hapus Per Record
+	function hapus(id) {
+		$.ajax({
+			type: 'POST',
+			data: 'id='+id,
+			url: 'mod_kontrak/crud_kontrak.php?pg=hapus',
+			success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil di Hapus',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#tambahdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal dihapus',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+			});
+		}
 
+	// Add Data
 	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
@@ -576,36 +599,5 @@
         return false;
     });
 
-    //IMPORT FILE PENDUKUNG 
-    $('#form-import').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'post',
-            url: 'mod_kontrak/crud_kontrak.php?pg=import',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                $('form button').on("click", function(e) {
-                    e.preventDefault();
-                });
-            },
-            success: function(data) {
-
-                $('#importdata').modal('hide');
-                iziToast.success({
-                    title: 'Mantap!',
-                    message: data,
-                    position: 'topRight'
-                });
-                setTimeout(function() {
-                    window.location.reload();
-                }, 2000);
-
-
-            }
-        });
-    });
 </script>
 <!-- End -->

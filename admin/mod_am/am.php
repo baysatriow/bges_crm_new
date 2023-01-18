@@ -132,7 +132,6 @@
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
 										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
-										<!-- <button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button> -->
 										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($am['id_am']) ?>')" >Hapus</button>
 										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -282,6 +281,7 @@
             }
 			});
 		}
+
 	$('#form-tambah').submit(function(e) {
         e.preventDefault();
         $.ajax({
