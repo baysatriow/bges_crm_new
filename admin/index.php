@@ -8,8 +8,12 @@ require("../config/functions.crud.php");
 
 if (isset($_SESSION['id_user'])) {
   $user = mysqli_fetch_array(mysqli_query($koneksi, "select * from tb_user where id_user='$_SESSION[id_user]'"));
-  $order_tb = mysqli_fetch_array(mysqli_query($koneksi, "select count(1) from tb_order"));
-  $total_order = $order_tb[0];
+  $order_count = mysqli_fetch_array(mysqli_query($koneksi, "select count(1) from tb_order"));
+  $total_order = $order_count[0];
+  $status_count = mysqli_fetch_array(mysqli_query($koneksi, "select count(status_order) from tb_order where status_order like 'COMPLETE'"));
+  $total_complete = $status_count[0];
+  $pelanggan_count = mysqli_fetch_array(mysqli_query($koneksi, "select count(1) from tb_pelanggan"));
+  $total_pelanggan = $pelanggan_count[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">

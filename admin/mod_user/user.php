@@ -12,7 +12,7 @@
 				<i class="flaticon-right-arrow"></i>
 			</li>
 			<li class="nav-item">
-				<a href="?pg=siswa">Data User</a>
+				<a href="?pg=user">Data User</a>
 			</li>
 		</ul>
 	</div>

@@ -12,7 +12,7 @@
 				<i class="flaticon-right-arrow"></i>
 			</li>
 			<li class="nav-item">
-				<a href="?pg=siswa">Data Account Manager</a>
+				<a href="?pg=am">Data Account Manager</a>
 			</li>
 		</ul>
 	</div>
