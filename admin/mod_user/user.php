@@ -20,7 +20,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button>
+					<!-- <button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button> -->
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
 					<!-- Modal Area -->
@@ -147,7 +147,9 @@
 									<td><img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail" width="100px"></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($user['id_user']) ?>"><i class="fas fa-info-circle"></i></button>
-										<!-- Modal Here -->
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"><i class="fas fa-plus-square"></i> Edit</button>
+										
+										<!-- Modal Details Start-->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($user['id_user']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
@@ -155,7 +157,7 @@
 									            	
 									                <form id="form-detail">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Siswa <b><?= $user['nama'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail User <b><?= $user['nama'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>
@@ -171,7 +173,7 @@
 									                        </div>
 															<div class="form-group">
 									                            <label>Username</label>
-									                            <input type="email" name="username" class="form-control" value="<?= $user['username'] ?>"readonly>
+									                            <input type="text" name="username" class="form-control" value="<?= $user['username'] ?>"readonly>
 									                        </div>
 															
 									                        <div class="form-group">
@@ -196,7 +198,58 @@
 									            </div>
 									        </div>
 									    </div>
-										<!-- Modal End -->
+										<!-- Modal Details End-->
+										
+										<!-- Modal Edit Start -->
+										<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<form id="form-edit" enctype='multipart/form-data'>
+														<div class="modal-header">
+															<h5 class="modal-title">Tambah Data User</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="form-group">
+																<label>Nama</label>
+																<input type="text" name="nama" class="form-control" value="<?= $user['nama'] ?>">
+															</div>
+															<div class="form-group">
+																<label>Email</label>
+																<input type="email" name="email" class="form-control" value="<?= $user['email'] ?>">
+															</div>
+															<div class="form-group">
+																<label>Username</label>
+																<input type="text" name="username" class="form-control" value="<?= $user['username'] ?>">
+															</div>
+											
+															<div class="form-group">
+																<label>Phone</label>
+																<input type="text" name="phone" class="form-control" value="<?= $user['phone'] ?>">
+															</div>
+															<div class="form-group">
+																<label>Roles</label>
+																<!-- <input type="text" name="Roles" class="form-control" required=""> -->
+																<select name="Roles" id="" class="form-control" >
+																	<option value="Admin">Admin</option>
+																	<option value="AM">AM</option>
+																	<option value="Office">Office</option>
+																</select>
+															</div>
+															<div class="form-group">
+												
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+															<button type="submit" class="btn btn-dark">Save</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal Edit Ends -->
 									</td>
 								</tr>
 								<?php } ?>
@@ -211,16 +264,19 @@
 </div>
 <!-- Page Script -->
 <script>
-	// Custom File Value
+	// Custom File Value Style
 	$(".custom-file-input").on("change", function() {
 		var fileName = $(this).val().split("\\").pop();
 		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 	});
 
+	// Checklist Value Check
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);
     });
+
+	// Delete Button From Checklist Value
     $(function() {
         $("#btnhapus").click(function() {
             id_array = new Array();
@@ -246,6 +302,8 @@
             return false;
         })
     });
+
+	// Add Data
 	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
@@ -266,6 +324,12 @@
                         window.location.reload();
                     }, 2000);
                     $('#tambahdata').modal('hide');
+                } else if(data == 'ukuran') {
+                    iziToast.warning({
+                        title: 'Maaf!',
+                        message: 'Ukuran File Lebih dari 2MB',
+                        position: 'topRight'
+                    });
                 } else {
                     iziToast.error({
                         title: 'Maaf!',
@@ -279,36 +343,45 @@
         return false;
     });
 
-    //IMPORT FILE PENDUKUNG 
-    $('#form-import').on('submit', function(e) {
+	// Edit Data
+	$('#form-edit').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'post',
-            url: 'mod_user/crud_user.php?pg=import',
-            data: new FormData(this),
+            type: 'POST',
+            url: 'mod_user/crud_user.php?pg=ubah',
+			data: new FormData(this),
             processData: false,
             contentType: false,
             cache: false,
-            beforeSend: function() {
-                $('form button').on("click", function(e) {
-                    e.preventDefault();
-                });
-            },
             success: function(data) {
-
-                $('#importdata').modal('hide');
-                iziToast.success({
-                    title: 'Mantap!',
-                    message: data,
-                    position: 'topRight'
-                });
-                setTimeout(function() {
-                    window.location.reload();
-                }, 2000);
-
-
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil ditambahkan',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#editdata').modal('hide');
+                } else if(data == 'ukuran') {
+                    iziToast.warning({
+                        title: 'Maaf!',
+                        message: 'Ukuran File Lebih dari 2MB',
+                        position: 'topRight'
+                    });
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal ditambahkan',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
             }
         });
+        return false;
     });
+
 </script>
 <!-- End -->

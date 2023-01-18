@@ -196,6 +196,7 @@
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
     });
+	// Edit Data
     $('#form-setting').on('submit', function(e) {
         e.preventDefault();
         $.ajax({

@@ -33,7 +33,7 @@
 		</div>
 		<div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
 			<div class="container container-login container-transparent animated fadeIn">
-				<h3 class="text-center">Sign In To Admin</h3>
+				<h3 class="text-center">Sign In To Applicaton</h3>
 				<form id="form-login" class="needs-validation" novalidate="">
 					<div class="login-form">
 						<div class="form-group">
