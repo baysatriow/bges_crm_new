@@ -467,6 +467,15 @@ if ($pg == 'import') {
         echo "gagal";
     }
 }
+// BLM JADI
+if ($pg == 'hapus') {
+    $id=$_POST['id'];
+    $id = mysql_escape_string($id);
+
+    $query = mysqli_query($koneksi, "DELETE from tb_kontrak where id_kontrak in = ".$id."");
+    
+    // $result = mysql_query($del);
+}
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
     $query = mysqli_query($koneksi, "DELETE from tb_kontrak where id_kontrak in (" . $kode . ")");
