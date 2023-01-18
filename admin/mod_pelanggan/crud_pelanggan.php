@@ -55,9 +55,9 @@ if ($pg == 'import') {
             $hasildata = $data->rowcount($sheet_index = 0);
             $sukses = $gagal = 0;
 
-            mysqli_query($koneksi, "truncate tb_pelanggan");
-            for ($i = 2; $i <= $hasildata; $i++) {
-                $nama_pel=$data->val($i, 2);
+            // mysqli_query($koneksi, "truncate tb_pelanggan");
+            for ($i = 3; $i <= $hasildata; $i++) {
+                $nama_pel=addslashes($data->val($i, 2));
                 $layanan=addslashes($data->val($i,3));
                 $ca=addslashes($data->val($i,4));
                 $ca_site=addslashes($data->val($i,5));
@@ -72,26 +72,26 @@ if ($pg == 'import') {
                 $phone=addslashes($data->val($i,14));
                 
                     $datax = [
-                        'nama_pel'=> $nama_pel,
-                        'layanan'=> $layanan,
-                        'ca'=> $ca,
-                        'ca_site'=> $ca_site,
-                        'ca_nipnas'=> $ca_nipnas,
-                        'ba'=> $ba,
-                        'ba_site'=> $ba_site,
-                        'nomor_quote'=> $nomor_quote,
-                        'nomor_aggre'=> $nomor_aggre,
-                        'nomor_order'=> $nomor_order,
-                        'sid'=> $sid,
-                        'alamat'=> $alamat,
-                        'phone'=> $phone,
-                        'status'=> 1
+                        'nama_pel'          => $nama_pel,
+                        'layanan'           => $layanan,
+                        'ca'                => $ca,
+                        'ca_site'           => $ca_site,
+                        'ca_nipnas'         => $ca_nipnas,
+                        'ba'                => $ba,
+                        'ba_site'           => $ba_site,
+                        'nomor_quote'       => $nomor_quote,
+                        'nomor_aggre'       => $nomor_aggre,
+                        'nomor_order'       => $nomor_order,
+                        'sid'               => $sid,
+                        'alamat'            => $alamat,
+                        'phone'             => $phone,
+                        // 'status'=> 1
                     ];
                     $exec = insert($koneksi, 'tb_pelanggan', $datax);
                     ($exec) ? $sukses++ : $gagal++;
                 
             }
-            $total = $hasildata - 1;
+            $total = $hasildata - 2;
             echo "Berhasil: $sukses | Gagal: $gagal | Dari: $total";
         }
     } else {
@@ -101,7 +101,7 @@ if ($pg == 'import') {
 
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
-    $query = mysqli_query($koneksi, "DELETE from daftar where id_daftar in (" . $kode . ")");
+    $query = mysqli_query($koneksi, "DELETE from tb_pelanggan where id_pel in (" . $kode . ")");
     if ($query) {
         echo 1;
     } else {

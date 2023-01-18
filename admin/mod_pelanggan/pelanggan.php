@@ -42,12 +42,14 @@
 				                    <div class="modal-body">
 				                        <div class="form-group">
 											<div class="custom-file">
-												<input type="file" name="file" class="custom-file-input" id="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-describedby="helpfile" required>
+												<input type="file" name="file" class="custom-file-input" id="file" accept="application/vnd.ms-excel" aria-describedby="helpfile" required>
 												<label class="custom-file-label">Import File Excel</label>
 											</div>
 				                            <small id="helpfile" class="form-text text-muted">File harus .xlx</small>
 				                        </div>
-				                        <a href="template_excel/importsekolah.xls">Download template Excel</a>
+										<div class="form-group">
+											<a class="text-light btn btn-success btn-sm" href="../assets/uploaded/template_excel/template_pel.xls" >Download Template Excel</a>
+										</div>
 				                    </div>
 				                    <div class="modal-footer">
 				                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -166,6 +168,18 @@
 </div>
 <!-- Page Script -->
 <script>
+
+	// Custom File Value
+	$(".custom-file-input").on("change", function() {
+	var fileName = $(this).val().split("\\").pop();
+	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+
+	$('#ceksemua').change(function() {
+        $(this).parents('#basic-datatables1:eq(0)').
+        find(':checkbox').attr('checked', this.checked);
+    });
+
 	$(document).ready(function(){
     $('#basic-datatables').DataTable({
         "processing": true,
