@@ -23,10 +23,15 @@
 					<?php 
 					if($user['level'] == "admin"){
 					?>
-					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button>
+					<!-- <button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#importdata"><i class="fas fa-upload"></i> Import</button> -->
 					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
 					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
-					<?php } ?>
+					<?php }
+					else if($user['level'] == "office") {
+					?>
+					<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#tambahdata"><i class="fas fa-plus-square"></i> Tambah</button>
+					<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+					<?php	} ?>
 					<!-- Modal Area -->
 					<!-- Modal Import -->
 				    <div class="modal fade" id="importdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -96,6 +101,7 @@
 				    </div>
 					<!-- End Modal Area -->
 				</div>
+
 				<div class="card-body">
 					<!-- Tabel Start -->
 					<div class="table-responsive">
@@ -125,8 +131,9 @@
 									<td><?= $am['segmen'] ?></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
-										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
+										<!-- <button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button> -->
+										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($am['id_am']) ?>')" >Hapus</button>
 										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
@@ -192,7 +199,7 @@
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
-															<button type="submit" class="btn btn-dark">Save</button>
+															<button type="submit" class="btn btn-dark" >Save</button>
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>
 									                </form>
@@ -246,6 +253,35 @@
             return false;
         })
     });
+
+	// Hapus Per Record
+	function hapus(id) {
+		$.ajax({
+			type: 'POST',
+			data: 'id='+id,
+			url: 'mod_am/crud_am.php?pg=hapus',
+			success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil di Hapus',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#tambahdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal dihapus',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+			});
+		}
 	$('#form-tambah').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -305,36 +341,5 @@
         return false;
     });
 
-    //IMPORT FILE PENDUKUNG 
-    $('#form-import').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'post',
-            url: 'mod_am/crud_am.php?pg=import',
-            data: new FormData(this),
-            processData: false,
-            contentType: false,
-            cache: false,
-            beforeSend: function() {
-                $('form button').on("click", function(e) {
-                    e.preventDefault();
-                });
-            },
-            success: function(data) {
-
-                $('#importdata').modal('hide');
-                iziToast.success({
-                    title: 'Mantap!',
-                    message: data,
-                    position: 'topRight'
-                });
-                setTimeout(function() {
-                    window.location.reload();
-                }, 2000);
-
-
-            }
-        });
-    });
 </script>
 <!-- End -->
