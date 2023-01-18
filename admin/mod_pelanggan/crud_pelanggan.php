@@ -21,37 +21,22 @@ if ($pg == 'ubah') {
 }
 if ($pg == 'tambah') {
     $data = [
-        'nama'          => $_POST['nama'],
-        'nis'           => $_POST['nis'],
-        'nik'           => $_POST['nik'],
-        'status'        => 1
+        'nama_pel'          => $_POST['nama_pel'],
+        'layanan'           => $_POST['layanan'],
+        'ca'                => $_POST['ca'],
+        'ca_site'           => $_POST['ca_site'],
+        'ca_nipnas'         => $_POST['ca_nipnas'],
+        'ba'                => $_POST['ba'],
+        'ba_site'           => $_POST['ba_site'],
+        'nomor_quote'       => $_POST['nomor_quote'],
+        'nomor_aggre'       => $_POST['nomor_aggre'],
+        'nomor_order'       => $_POST['nomor_order'],
+        'sid'               => $_POST['sid'],
+        'alamat'            => $_POST['alamat'],
+        'phone'             => $_POST['phone'],
     ];
-    $exec = insert($koneksi, 'daftar', $data);
+    $exec = insert($koneksi, 'tb_pelanggan', $data);
     echo $exec;
-}
-if ($pg == 'grab_sekolah') {
-    $sekolah = $_POST['sekolah'];
-    $kecamatan = explode(':', $_POST['kecamatan']);
-    $kabupaten = explode(':', $_POST['kabupaten']);
-    $provinsi = explode(':', $_POST['provinsi']);
-    foreach ($sekolah as $sekolah) {
-        $data = explode(":", $sekolah);
-        $npsn = $data[0];
-        $nama = $data[1];
-        $data = [
-            'npsn'          => $npsn,
-            'nama_sekolah'   => $nama,
-            'status'         => 1,
-            'kecamatan'     => $kecamatan[1],
-            'kabupaten'     => $kabupaten[1],
-            'provinsi'     => $provinsi[1]
-        ];
-
-        $cek = rowcount($koneksi, 'sekolah', ['npsn' => $npsn]);
-        if ($cek == 0) {
-            $exec = insert($koneksi, 'sekolah', $data);
-        }
-    }
 }
 if ($pg == 'hapus') {
     $npsn = $_POST['npsn'];
@@ -70,100 +55,39 @@ if ($pg == 'import') {
             $hasildata = $data->rowcount($sheet_index = 0);
             $sukses = $gagal = 0;
 
-            mysqli_query($koneksi, "truncate sekolah");
+            mysqli_query($koneksi, "truncate tb_pelanggan");
             for ($i = 2; $i <= $hasildata; $i++) {
-                $no_daftar=$data->val($i, 2);
-                $nik=addslashes($data->val($i,3));
-                $nisn=addslashes($data->val($i,4));
-                $nama=addslashes($data->val($i,5));
-                $foto=addslashes($data->val($i,6));
-                $jenkel=addslashes($data->val($i,7));
-                $tempat_lahir=addslashes($data->val($i,8));
-                $tgl_lahir=addslashes($data->val($i,9));
-                $kelas=addslashes($data->val($i,10));
-                $jurusan=addslashes($data->val($i,11));
-                $jenjang=addslashes($data->val($i,12));
-                $agama=addslashes($data->val($i,13));
-                $alamat=addslashes($data->val($i,14));
-                $rt=addslashes($data->val($i,15));
-                $rw=addslashes($data->val($i,16));
-                $desa=addslashes($data->val($i,17));
-                $kecamatan=addslashes($data->val($i,18));
-                $kode_pos=addslashes($data->val($i,19));
-                $transportasi=addslashes($data->val($i,20));
-                $no_hp=addslashes($data->val($i,21));
-                $tinggal=addslashes($data->val($i,22));
-                $nik_ayah=addslashes($data->val($i,23));
-                $nama_ayah=addslashes($data->val($i,24));
-                $tgl_lahir_ayah=addslashes($data->val($i,25));
-                $pendidikan_ayah=addslashes($data->val($i,26));
-                $pekerjaan_ayah=addslashes($data->val($i,27));
-                $penghasilan_ayah=addslashes($data->val($i,28));
-                $nik_ibu=addslashes($data->val($i,29));
-                $nama_ibu=addslashes($data->val($i,30));
-                $tgl_lahir_ibu=addslashes($data->val($i,31));
-                $pendidikan_ibu=addslashes($data->val($i,32));
-                $pekerjaan_ibu=addslashes($data->val($i,33));
-                $penghasilan_ibu=addslashes($data->val($i,34));
-                $nik_wali=addslashes($data->val($i,35));
-                $nama_wali=addslashes($data->val($i,36));
-                $tgl_lahir_wali=addslashes($data->val($i,37));
-                $pendidikan_wali=addslashes($data->val($i,38));
-                $pekerjaan_wali=addslashes($data->val($i,39));
-                $penghasilan_wali=addslashes($data->val($i,40));
-                $no_kip=addslashes($data->val($i,41));
-                $password=addslashes($data->val($i,42));
-                $aktivasi=addslashes($data->val($i,43));
-                $password_cbt=addslashes($data->val($i,44));
-
+                $nama_pel=$data->val($i, 2);
+                $layanan=addslashes($data->val($i,3));
+                $ca=addslashes($data->val($i,4));
+                $ca_site=addslashes($data->val($i,5));
+                $ca_nipnas=addslashes($data->val($i,6));
+                $ba=addslashes($data->val($i,7));
+                $ba_site=addslashes($data->val($i,8));
+                $nomor_quote=addslashes($data->val($i,9));
+                $nomor_aggre=addslashes($data->val($i,10));
+                $nomor_order=addslashes($data->val($i,11));
+                $sid=addslashes($data->val($i,12));
+                $alamat=addslashes($data->val($i,13));
+                $phone=addslashes($data->val($i,14));
                 
                     $datax = [
-                        'no_daftar'=> $no_daftar,
-                        'nik'=> $nik,
-                        'nisn'=> $nisn,
-                        'nama'=> $nama,
-                        'foto'=> $foto,
-                        'jenkel'=> $jenkel,
-                        'tempat_lahir'=> $tempat_lahir,
-                        'tgl_lahir'=> $tgl_lahir,
-                        'kelas'=> $kelas,
-                        'jurusan'=> $jurusan,
-                        'jenjang'=> $jenjang,
-                        'agama'=> $agama,
+                        'nama_pel'=> $nama_pel,
+                        'layanan'=> $layanan,
+                        'ca'=> $ca,
+                        'ca_site'=> $ca_site,
+                        'ca_nipnas'=> $ca_nipnas,
+                        'ba'=> $ba,
+                        'ba_site'=> $ba_site,
+                        'nomor_quote'=> $nomor_quote,
+                        'nomor_aggre'=> $nomor_aggre,
+                        'nomor_order'=> $nomor_order,
+                        'sid'=> $sid,
                         'alamat'=> $alamat,
-                        'rt'=> $rt,
-                        'rw'=> $rw,
-                        'desa'=> $desa,
-                        'kecamatan'=> $kecamatan,
-                        'kode_pos'=> $kode_pos,
-                        'transportasi'=> $transportasi,
-                        'no_hp'=> $no_hp,
-                        'tinggal'=> $tinggal,
-                        'nik_ayah'=> $nik_ayah,
-                        'nama_ayah'=> $nama_ayah,
-                        'tgl_lahir_ayah'=> $tgl_lahir_ayah,
-                        'pendidikan_ayah'=> $pendidikan_ayah,
-                        'pekerjaan_ayah'=> $pekerjaan_ayah,
-                        'penghasilan_ayah'=> $penghasilan_ayah,
-                        'nik_ibu'=> $nik_ibu,
-                        'nama_ibu'=> $nama_ibu,
-                        'tgl_lahir_ibu'=> $tgl_lahir_ibu,
-                        'pendidikan_ibu'=> $pendidikan_ibu,
-                        'pekerjaan_ibu'=> $pekerjaan_ibu,
-                        'penghasilan_ibu'=> $penghasilan_ibu,
-                        'nik_wali'=> $nik_wali,
-                        'nama_wali'=> $nama_wali,
-                        'tgl_lahir_wali'=> $tgl_lahir_wali,
-                        'pendidikan_wali'=> $pendidikan_wali,
-                        'pekerjaan_wali'=> $pekerjaan_wali,
-                        'penghasilan_wali'=> $penghasilan_wali,
-                        'no_kip'=> $no_kip,
-                        'password'=> $password,
-                        'aktivasi'=>$aktivasi,
-                        'password_cbt'=>$password_cbt,
+                        'phone'=> $phone,
                         'status'=> 1
                     ];
-                    $exec = insert($koneksi, 'daftar', $datax);
+                    $exec = insert($koneksi, 'tb_pelanggan', $datax);
                     ($exec) ? $sukses++ : $gagal++;
                 
             }
@@ -174,91 +98,7 @@ if ($pg == 'import') {
         echo "gagal";
     }
 }
-if ($pg == 'get_provinsi') {
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/index11.php";
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listProvinsi = $getData->listProvinsi($get);
-    curl_close($ch);
 
-    echo "<option value=''>Pilih Provinsi</option>";
-    foreach ($listProvinsi as $prov) {
-        echo "<option value='$prov[link]:$prov[prov_name]'>$prov[prov_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_kabupaten') {
-    $provinsi = $_POST['provinsi'];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $provinsi;
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listKabupaten = $getData->listKabupaten($get);
-    curl_close($ch);
-    print_r($listKabupaten);
-    echo "<option value=''>Pilih Kabupaten</option>";
-    foreach ($listKabupaten as $kab) {
-        echo "<option value='$kab[link]:$kab[kab_name]'>$kab[kab_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_kecamatan') {
-
-    $data = explode(':', $_POST['kabupaten']);
-    $kabupaten = $data[0];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $kabupaten;
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listKecamatan = $getData->listKecamatan($get);
-    curl_close($ch);
-    print_r($listKecamatan);
-    echo "<option value=''>Pilih Kecamatan</option>";
-    foreach ($listKecamatan as $kec) {
-        echo "<option value='$kec[link]:$kec[kec_name]'>$kec[kec_name]</option>";
-    }
-    unset($getData);
-}
-if ($pg == 'get_sekolah') {
-    $data = explode(':', $_POST['kec']);
-    $kec = $data[0];
-    $getData = new GetData;
-    $url = "https://referensi.data.kemdikbud.go.id/" . $kec . "&level=3";
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
-    $get = curl_exec($ch);
-    $listNpsn = $getData->listNpsn($get);
-    curl_close($ch);
-    echo "
-    <button type='submit' class='btn btn-primary float-right'>Ambil Data</button>
-    <div class='form-check form-check-inline'>
-    <label class='form-check-label'>
-    
-            <input class='form-check-input' type='checkbox'  id='checkAll'>Pilih Semua Sekolah
-
-    </label>
-    </div><br>";
-    foreach ($listNpsn as $sekolah) {
-        echo "
-        <div class='form-check form-check-inline'>
-        <label class='form-check-label'>
-        
-                <input class='form-check-input' type='checkbox' name='sekolah[]'  value='$sekolah[npsn]:$sekolah[nama_sekolah]'>$sekolah[npsn] - $sekolah[nama_sekolah]
-
-        </label>
-        </div><br>";
-    }
-    echo "<script>
-    $('#checkAll').click(function() {
-        $('input:checkbox').prop('checked', this.checked);
-    });
-    </script>";
-    unset($getData);
-}
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
     $query = mysqli_query($koneksi, "DELETE from daftar where id_daftar in (" . $kode . ")");

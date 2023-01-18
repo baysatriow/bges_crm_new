@@ -41,8 +41,10 @@
 				                    </div>
 				                    <div class="modal-body">
 				                        <div class="form-group">
-				                            <label for="file">Import File Excel</label>
-				                            <input type="file" class="form-control-file" name="file" id="file" placeholder="" aria-describedby="helpfile" required>
+											<div class="custom-file">
+												<input type="file" name="file" class="custom-file-input" id="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" aria-describedby="helpfile" required>
+												<label class="custom-file-label">Import File Excel</label>
+											</div>
 				                            <small id="helpfile" class="form-text text-muted">File harus .xlx</small>
 				                        </div>
 				                        <a href="template_excel/importsekolah.xls">Download template Excel</a>
@@ -70,55 +72,55 @@
 				                    <div class="modal-body">
 				                        <div class="form-group">
 				                            <label>Nama Pelanggan</label>
-				                            <input type="text" name="nama" class="form-control" required="">
+				                            <input type="text" name="nama_pel" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
 				                            <label>Alamat</label>
-				                            <input type="text" name="nis" class="form-control" required="">
+				                            <input type="text" name="alamat" class="form-control" required="">
 				                        </div>
 				                        <div class="form-group">
 				                            <label>Phone</label>
-				                            <input type="number" name="nik" class="form-control">
+				                            <input type="text" name="phone" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Layanan</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="layanan" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Customer Account</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="ca" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Customer Account Site</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="ca_site" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Customer Account Nipnas</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="ca_nipnas" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Billing Account</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="ba" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Billing Account Site</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="ba_site" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Quote</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="nomor_quote" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Aggrement</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="nomor_aggre" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Nomor Order</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="nomor_order" class="form-control">
 				                        </div>
 										<div class="form-group">
 				                            <label>Sid</label>
-				                            <input type="text" name="nik" class="form-control">
+				                            <input type="text" name="sid" class="form-control">
 				                        </div>
 				                    </div>
 				                    <div class="modal-footer">
@@ -185,7 +187,7 @@
                 i++;
             });
             $.ajax({
-                url: "mod_siswa/crud_siswa.php?pg=hapusdaftar",
+                url: "mod_pelanggan/crud_pelanggan.php?pg=hapusdaftar",
                 data: "kode=" + id_array,
                 type: "POST",
                 success: function(respon) {
@@ -205,7 +207,7 @@
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'mod_siswa/crud_siswa.php?pg=tambah',
+            url: 'mod_pelanggan/crud_pelanggan.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
@@ -236,7 +238,7 @@
         e.preventDefault();
         $.ajax({
             type: 'post',
-            url: 'mod_siswa/crud_siswa.php?pg=import',
+            url: 'mod_pelanggan/crud_pelanggan.php?pg=import',
             data: new FormData(this),
             processData: false,
             contentType: false,
