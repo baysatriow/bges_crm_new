@@ -92,7 +92,7 @@
 							</a>
 						</li> -->
 						<li>
-							<a href="?pg=kartu">
+							<a href="?pg=setting">
 								<span class="sub-item">Pengaturan Aplikasi</span>
 							</a>
 						</li>
