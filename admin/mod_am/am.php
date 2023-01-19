@@ -131,7 +131,7 @@
 									<td><?= $am['segmen'] ?></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"></i>Edit</button>
 										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($am['id_am']) ?>')" >Hapus</button>
 										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -170,7 +170,7 @@
 										<!-- Modal End -->
 
 										<!-- Modal Edit Here -->
-										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="editdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
@@ -198,7 +198,7 @@
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
-															<button type="submit" class="btn btn-dark" >Save</button>
+															<button type="submit" class="btn btn-dark">Save</button>
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>
 									                </form>
@@ -314,9 +314,9 @@
 	$('#form-edit').submit(function(e) {
         e.preventDefault();
         $.ajax({
-            type: 'POST',
-            url: 'mod_am/crud_am.php?pg=editdata',
-            data: $(this).serialize(),
+            type:'POST',
+            url: 'mod_am/crud_am.php?pg=edit',
+			data: $(this).serialize(),
             success: function(data) {
                 if (data == 'OK') {
                     iziToast.success({
