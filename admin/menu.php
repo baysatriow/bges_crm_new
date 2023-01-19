@@ -86,16 +86,20 @@
 				</a>
 				<div class="collapse" id="forms">
 					<ul class="nav nav-collapse">
-						<!-- <li>
-							<a href="?pg=user">
+						<li>
+							<a href="?pg=usetting">
 								<span class="sub-item">Users</span>
 							</a>
-						</li> -->
+						</li>
+						<?php
+						if($user['level'] == "admin"){
+							?>
 						<li>
 							<a href="?pg=setting">
 								<span class="sub-item">Pengaturan Aplikasi</span>
 							</a>
 						</li>
+						<?php }?>
 					</ul>
 				</div>
 			</li>

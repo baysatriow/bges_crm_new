@@ -14,4 +14,6 @@ if ($pg == '') {
     include "mod_user/user.php";  
 }elseif ($pg == 'setting') {
     include "mod_setting/setting.php";
+}elseif ($pg == 'usetting'){
+    include "mod_user_setting/usetting.php";
 }
