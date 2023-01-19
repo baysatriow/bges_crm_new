@@ -7,11 +7,12 @@ if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
 if ($pg == 'ubah') {
-    $id = $_POST['id_user'];
+  
     // $query = mysqli_query($koneksi, "select * from tb_user where id_user='$id'");
     // $user = mysqli_fetch_array($query);
     // $pw_lama = $_POST['password_lama'];
-    // $pw_baru = password_hash($_POST['password_baru']);
+    // $pw_baru = password_hash($_POST['password_baru'])
+    $id = $_POST['id_user'];;
     $data = [
         'nama'          => $_POST['nama'],
         'username'      => $_POST['username'],
@@ -38,51 +39,33 @@ if ($pg == 'ubah') {
         if ($_FILES['profile']['name'] <> '') {
             $profile = $_FILES['profile']['name'];
             $temp = $_FILES['profile']['tmp_name'];
+            $ukuran = $_FILES['profile']['size'];
             $ext = explode('.', $profile);
             $ext = end($ext);
-            if (in_array($ext, $ektensi)) {
-                $dest = 'assets/uploaded/profile/' . $profile;
-                $upload = move_uploaded_file($temp, '../../' . $dest);
-                if ($upload) {
-                    $data2 = [
-                        'photo' => $profile
-                    ];
-                    $exec = update($koneksi, 'tb_user', $data2, $where);
-                } else {
-                    echo "gagal";
+
+            if($ukuran < 1044070) {
+                if (in_array($ext, $ektensi)) {
+                    $dest = 'assets/uploaded/profile/' . $profile;
+                    $upload = move_uploaded_file($temp, '../../' . $dest);
+                    if ($upload) {
+                        $data2 = [
+                            'photo' => $profile
+                        ];
+                        $exec = update($koneksi, 'tb_user', $data2, $where);
+                        if($exec){
+                            
+                        }
+                    } else {
+                        echo "gagal";
+                    }
                 }
+                
+               
+            }else{
+                echo "ukuran";
             }
+            
         }
-    } else {
-        echo "Gagal menyimpan";
-    }
-}
-if ($pg == 'infobayar') {
-    $data = [
-        'infobayar' => $_POST['info']
-    ];
-    $where = [
-        'id_setting' => 1
-    ];
-    $exec = update($koneksi, 'tb_setting', $data, $where);
-
-    if ($exec) {
-        echo "ok";
-    } else {
-        echo "Gagal menyimpan";
-    }
-}
-if ($pg == 'syarat') {
-    $data = [
-        'syarat' => $_POST['syarat']
-    ];
-    $where = [
-        'id_setting' => 1
-    ];
-    $exec = update($koneksi, 'tb_setting', $data, $where);
-
-    if ($exec) {
-        echo "ok";
     } else {
         echo "Gagal menyimpan";
     }

@@ -123,17 +123,23 @@
                 });
             },
             success: function(data) {
-
-                iziToast.info({
-                    title: 'Sukses',
-                    message: data,
-                    position: 'topRight'
-                });
-                setTimeout(function() {
-                    window.location.reload();
-                }, 2000);
-
-
+                if(data == 'ukuran'){
+					iziToast.warning({
+                        title: 'Maaf!',
+                        message: 'Ukuran File Terlalu Besar',
+                        position: 'topRight'
+                    });
+				}else {
+                    iziToast.info({
+                        title: 'Sukses',
+                        message: 'Data Berhasil diubah',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
             }
         });
     });
