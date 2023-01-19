@@ -71,12 +71,23 @@
 		                    </div>
 		                    <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
 		                </div>
-
 		            </div>
 		            <div class="form-group row align-items-center">
 		                <label class="form-control-label col-sm-3 text-md-right">Preview</label>
 		                <div class="col-sm-6 col-md-6">
 		                    <img src="../assets/uploaded/profile/<?= $user_setting['photo'] ?>" alt="Profile" class="img-thumbnail" width="100">
+		                </div>
+		            </div>
+					<div class="form-group row align-items-center">
+		                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Password Lama</label>
+		                <div class="col-sm-6 col-md-9">
+		                    <input type="password" name="password_lama" class="form-control" Value="<?= $user_setting['password'] ?>">
+		                </div>
+		            </div>
+					<div class="form-group row align-items-center">
+		                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Password Baru</label>
+		                <div class="col-sm-6 col-md-9">
+		                    <input type="password" name="password_baru" class="form-control">
 		                </div>
 		            </div>
 				</div>

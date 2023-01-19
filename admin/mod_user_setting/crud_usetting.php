@@ -8,6 +8,10 @@ if (!isset($_SESSION['id_user'])) {
 }
 if ($pg == 'ubah') {
     $id = $_POST['id_user'];
+    // $query = mysqli_query($koneksi, "select * from tb_user where id_user='$id'");
+    // $user = mysqli_fetch_array($query);
+    // $pw_lama = $_POST['password_lama'];
+    // $pw_baru = password_hash($_POST['password_baru']);
     $data = [
         'nama'          => $_POST['nama'],
         'username'      => $_POST['username'],
@@ -19,6 +23,16 @@ if ($pg == 'ubah') {
     ];
     $exec = update($koneksi, 'tb_user', $data, $where);
     echo mysqli_error($koneksi);
+
+    // if ($exec) {
+    //     if (!password_verify($pw_lama, $user['password'])){
+    //         $data3 = [
+    //             'password'          => password_hash($_POST['password_baru']),
+    //         ];
+    //         $exec = update($koneksi, 'tb_user', $data, $where);
+    //     }
+    
+    // }
     if ($exec) {
         $ektensi = ['jpg', 'png'];
         if ($_FILES['profile']['name'] <> '') {
@@ -39,16 +53,6 @@ if ($pg == 'ubah') {
                 }
             }
         }
-        // if ($_FILES['ttd']['name'] <> '') {
-        //     $profile = $_FILES['ttd']['name'];
-        //     $temp = $_FILES['ttd']['tmp_name'];
-        //     $ext = explode('.', $profile);
-        //     $ext = end($ext);
-        //     if (in_array($ext, $ektensi)) {
-        //         $dest = 'dist/img/ttd' . '.' . $ext;
-        //         $upload = move_uploaded_file($temp, '../' . $dest);
-        //     }
-        // }
     } else {
         echo "Gagal menyimpan";
     }
