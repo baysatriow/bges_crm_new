@@ -243,152 +243,494 @@
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="../assets/uploaded/files/kb/<?= $kontrak['kb']?>"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailkb&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 										
 									</td>
-									<td>
-									<?php 
-										if ($kontrak['ba_ren'] == null) {
-										?>
-										<span class="badge badge-danger">Belum Upload</span>
-										<?php }else{?>
-										<a href="#" data-toggle="modal" data-target="#detailfile&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
-										<?php } ?>
-									</td>
-										<div class="modal fade bd-example-modal-lg" id="detailfile&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<!-- Modal Detail KB -->
+										<div class="modal fade bd-example-modal-lg" id="detailkb&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<!-- Desc -->
-													
 													<form id="form-detail">
 														<div class="modal-header">
-															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data KB <b><?= $kontrak['no_order'] ?></b></h5>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
 														</div>
 														<div class="modal-body">
-														<embed src="../uploaded/files/kb<?=$kontrak['kb']?>" type="application/pdf">
-															<object data="../uploaded/test.pdf" type="application/pdf">
-																
-															</object>
+															<p>Detail Data KB</p>
+															<!-- <object data="../assets/uploaded/files/kb/<?= $kontrak['kb']?>" type="Application/pdf"></object>
+															<iframe src="../assets/uploaded/files/kb/<?= $kontrak['kb']?>" frameborder="0"></iframe> -->
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/kb/<?= $kontrak['kb']?>" width="100%" height="500"></embed>
+															</div>
+															
 														</div>
-														<div class="modal-footer">
+														<div class="modal-footer justify-content-center">
 															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 														</div>
 													</form>
 												</div>
 											</div>
 										</div>
+										<!-- Modal End -->
+									<td>
+									<?php 
+										if ($kontrak['ba_ren'] == null) {
+										?>
+										<span class="badge badge-danger">Belum Upload</span>
+										<?php }else{?>
+											<a href="#" data-toggle="modal" data-target="#detailba_ren&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
+										<?php } ?>
+									</td>
+										<!-- Modal Detail BA Ren -->
+										<div class="modal fade bd-example-modal-lg" id="detailba_ren&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BA Renewals <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BA Renewals</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/ba_ren/<?= $kontrak['ba_ren']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['ba_do'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailba_do&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BA DO -->
+										<div class="modal fade bd-example-modal-lg" id="detailba_do&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BA DO <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BA DO</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/ba_do/<?= $kontrak['ba_do']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['baso'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbaso&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BASO-->
+										<div class="modal fade bd-example-modal-lg" id="detailbaso&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BASO <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BASO</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/baso/<?= $kontrak['baso']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['ba_pen'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailba_pen&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BA Penjelasan-->
+										<div class="modal fade bd-example-modal-lg" id="detailba_pen&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BA Penjelasan <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail DataBA Penjelasan</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/ba_pen/<?= $kontrak['ba_pen']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['po'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailpo&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail P0-P8-->
+										<div class="modal fade bd-example-modal-lg" id="detailpo&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data P0-P8 <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data P0-P8</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/po/<?= $kontrak['po']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['kl'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailkl&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail KL/SP/WO -->
+										<div class="modal fade bd-example-modal-lg" id="detailkl&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data KL/SP/WO <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data KL/SP/WO</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/kl/<?= $kontrak['kl']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['sph'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailsph&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail SPH-->
+										<div class="modal fade bd-example-modal-lg" id="detailsph&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data SPH <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data SPH</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/sph/<?= $kontrak['sph']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['skm'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailskm&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail SKM-->
+										<div class="modal fade bd-example-modal-lg" id="detailskm&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data SKM <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data SKM</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/skm/<?= $kontrak['skm']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['baa'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbaa&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BAA-->
+										<div class="modal fade bd-example-modal-lg" id="detailbaa&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BAA <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BAA</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/baa/<?= $kontrak['baa']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['bai'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbai&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BAI-->
+										<div class="modal fade bd-example-modal-lg" id="detailbai&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BAI <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BAI</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/bai/<?= $kontrak['bai']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['baut'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbaut&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BAUT-->
+										<div class="modal fade bd-example-modal-lg" id="detailbaut&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BAUT <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BAUT</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/baut/<?= $kontrak['baut']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['bast'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbast&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BAST-->
+										<div class="modal fade bd-example-modal-lg" id="detailbast&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BAST <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BAST</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/bast/<?= $kontrak['bast']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 									<?php 
 										if ($kontrak['bard'] == null) {
 										?>
 										<span class="badge badge-danger">Belum Upload</span>
 										<?php }else{?>
-										<a href="#"><span class="badge badge-success">Sudah Upload</span></a>
+											<a href="#" data-toggle="modal" data-target="#detailbard&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><span class="badge badge-success">Sudah Upload</span></a>
 										<?php } ?>
 									</td>
+										<!-- Modal Detail BARD-->
+										<div class="modal fade bd-example-modal-lg" id="detailbard&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<!-- Desc -->
+													<form id="form-detail">
+														<div class="modal-header">
+															<h5 class="modal-title"><i class="fas fa-info-circle"></i> Detail Data BARD <b><?= $kontrak['no_order'] ?></b></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<p>Detail Data BARD</p>
+															<div class="">
+															<embed type="application/pdf" src="../assets/uploaded/files/bard/<?= $kontrak['bard']?>" width="100%" height="500"></embed>
+															</div>
+														</div>
+														<div class="modal-footer justify-content-center">
+															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<!-- Modal End -->
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
 										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"></i>Edit</button>
@@ -396,6 +738,7 @@
 
 										<!-- Modal  Details Start -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
@@ -485,7 +828,7 @@
 									            	
 									                <form id="form-edit">
 									                    <div class="modal-header">
-									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i>Edit Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
 									                        </button>

@@ -9,7 +9,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 if ($pg == 'edit') {
 
-    $id=$_POST['id'];
+    $id=$_POST['id_am'];
 
     $data = [
         'nama_am'          => $_POST['nama_am'],
