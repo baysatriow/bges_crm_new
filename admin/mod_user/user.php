@@ -148,6 +148,7 @@
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($user['id_user']) ?>"><i class="fas fa-info-circle"></i></button>
 										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"><i class="fas fa-plus-square"></i> Edit</button>
+										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($user['id_user']) ?>')" >Hapus</button>
 										
 										<!-- Modal Details Start-->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($user['id_user']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -302,6 +303,35 @@
             return false;
         })
     });
+
+	// Delete Record By id
+	function hapus(id) {
+		$.ajax({
+			type: 'POST',
+			data: 'id='+id,
+			url: 'mod_user/crud_user.php?pg=hapus',
+			success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil di Hapus',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#tambahdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal dihapus',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+			});
+		}
 
 	// Add Data
 	$('#form-tambah').on('submit', function(e) {

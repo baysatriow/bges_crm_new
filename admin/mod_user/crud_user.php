@@ -107,11 +107,21 @@ if ($pg == 'tambah_aja') {
     // $exec = insert($koneksi, 'tb_user', $data);
     // echo $exec;
 }
+
+// Hapus Per Record
 if ($pg == 'hapus') {
-    $npsn = $_POST['npsn'];
-    delete($koneksi, 'sekolah', ['npsn' => $npsn]);
+
+    $id=$_POST['id'];
+    // $hapus = mysql_query("delete from tb_am where id=".$id." ");
+    $query = mysqli_query($koneksi, "DELETE from tb_user where id_user=".$id." ");
+    if($query) {
+        echo "OK";
+    } else {
+        // 
+    }
 }
 
+// Delete Record By Checkbox
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
     $query = mysqli_query($koneksi, "DELETE from tb_user where id_user in (" . $kode . ")");
