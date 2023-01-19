@@ -131,7 +131,7 @@
 									<td><?= $am['segmen'] ?></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"></i>Edit</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($am['id_am']) ?>"></i>Edit</button>
 										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($am['id_am']) ?>')" >Hapus</button>
 										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -170,7 +170,7 @@
 										<!-- Modal End -->
 
 										<!-- Modal Edit Here -->
-										<div class="modal fade bd-example-modal-lg" id="editdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="editdata&id=<?= enkripsi($am['id_am']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
@@ -184,7 +184,7 @@
 									                    </div>
 									                    <div class="modal-body">
 									                        <div class="form-group">
-																<input type="hidden" name="id_am" value="<?php echo $am['id_am'] ?>">
+																<input type="text" name="id_am" value="<?php echo $am['id_am'] ?>">
 									                            <label>Nama</label>
 									                            <input type="text" name="nama_am" class="form-control" value="<?= $am['nama_am'] ?>">
 									                        </div>
@@ -220,6 +220,7 @@
 </div>
 <!-- Page Script -->
 <script>
+	// Checklist Box Delete Check
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);
@@ -253,7 +254,7 @@
         })
     });
 
-	// Hapus Per Record
+	// Delete Record By id
 	function hapus(id) {
 		$.ajax({
 			type: 'POST',
@@ -282,6 +283,7 @@
 			});
 		}
 
+	// Add Record 
 	$('#form-tambah').submit(function(e) {
         e.preventDefault();
         $.ajax({
@@ -311,6 +313,8 @@
         });
         return false;
     });
+
+	// Edit
 	$('#form-edit').submit(function(e) {
         e.preventDefault();
         $.ajax({

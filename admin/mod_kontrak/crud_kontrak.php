@@ -8,18 +8,67 @@ $id = $_SESSION['id_user'];
 if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
-if ($pg == 'ubah') {
-    $status = (isset($_POST['status'])) ? 1 : 0;
+
+// Edit Data By id
+if ($pg == 'edit') {
+
+    $id=$_POST['id_am'];
+
     $data = [
-        'nama_sekolah' => $_POST['nama'],
-        'alamat' => $_POST['alamat'],
-        'status' => $status
+        'nama_am'          => $_POST['nama_am'],
+        'nik'              => $_POST['nik'],
+        'segmen'           => $_POST['segmen'],
     ];
-    $npsn = $_POST['npsn'];
-    $exec = insert($koneksi, 'sekolah', $data, ['npsn' => $npsn]);
+    $exec = update($koneksi, 'tb_am', $data, ['id_am' => $id]);
     echo $exec;
 }
 
+// Mentahan Edit data
+if ($pg == 'ubah') {
+    $data = [
+        'no_order'  => $_POST['no_order'],
+    ];
+    $id = [
+        'id_setting' => 1
+    ];
+    $exec = update($koneksi, 'tb_setting', $data, $where);
+    echo mysqli_error($koneksi);
+    if ($exec) {
+        $ektensi = ['jpg', 'png'];
+        if ($_FILES['logo']['name'] <> '') {
+            $logo = $_FILES['logo']['name'];
+            $temp = $_FILES['logo']['tmp_name'];
+            $ext = explode('.', $logo);
+            $ext = end($ext);
+            if (in_array($ext, $ektensi)) {
+                $dest = 'assets/img/logo/logo' . rand(1, 1000) . '.' . $ext;
+                $upload = move_uploaded_file($temp, '../../' . $dest);
+                if ($upload) {
+                    $data2 = [
+                        'logo' => $dest
+                    ];
+                    $exec = update($koneksi, 'tb_setting', $data2, $where);
+                } else {
+                    echo "gagal";
+                }
+            }
+        }
+        // if ($_FILES['ttd']['name'] <> '') {
+        //     $logo = $_FILES['ttd']['name'];
+        //     $temp = $_FILES['ttd']['tmp_name'];
+        //     $ext = explode('.', $logo);
+        //     $ext = end($ext);
+        //     if (in_array($ext, $ektensi)) {
+        //         $dest = 'dist/img/ttd' . '.' . $ext;
+        //         $upload = move_uploaded_file($temp, '../' . $dest);
+        //     }
+        // }
+    } else {
+        echo "Gagal menyimpan";
+    }
+}
+
+// Add Data
 if  ($pg == 'tambah'){
 
     $ektensi = ['pdf'];
@@ -192,7 +241,7 @@ if  ($pg == 'tambah'){
 
 }
 
-// Hapus Per Record
+// Delete Record By id
 if ($pg == 'hapus') {
 
     $id=$_POST['id'];
@@ -205,7 +254,7 @@ if ($pg == 'hapus') {
     }
 }
 
-// Hapus Menggunakan Checklist
+// Delete Record By Check Box
 if ($pg == 'hapusdaftar') {
     $kode = $_POST['kode'];
     $query = mysqli_query($koneksi, "DELETE from tb_kontrak where id_kontrak in (" . $kode . ")");

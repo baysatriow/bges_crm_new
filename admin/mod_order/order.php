@@ -234,13 +234,13 @@
 							</thead>
 							<tbody>
 								<?php
-		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am ");
+		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am");
 		                            $no = 0;
 		                            while ($order = mysqli_fetch_array($query)) {
 		                                $no++;
 		                            ?>
 								<tr>
-									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_am'] ?>"></td>
+									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_order'] ?>"></td>
 									<td><?= $no; ?></td>
 									<td><?= $order['tgl_input'] ?></td>
 									<td><?= $order['segmen'] ?></td>
