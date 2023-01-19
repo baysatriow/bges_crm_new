@@ -391,11 +391,11 @@
 									</td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
-										<a href=""></a>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"></i>Edit</button>
 										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($kontrak['id_kontrak']) ?>')" >Hapus</button>
-										<!-- Modal Here -->
+
+										<!-- Modal  Details Start -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
@@ -475,6 +475,147 @@
 									            </div>
 									        </div>
 									    </div>
+										<!-- Modal Details End -->
+
+										<!-- Modal Edit Here -->
+										<div class="modal fade bd-example-modal-lg" id="editdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+									        <div class="modal-dialog" role="document">
+									            <div class="modal-content">
+									            	<!-- Desc -->
+									            	
+									                <form id="form-edit">
+									                    <div class="modal-header">
+									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit Kontrak <b><?= $kontrak['no_order'] ?></b></h5>
+									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									                            <span aria-hidden="true">&times;</span>
+									                        </button>
+									                    </div>
+									                    <div class="modal-body">
+															<div class="form-group">
+																<label>No Order</label>
+																<select type="text" id="no_order_search" name="no_order" class="form-control selectpicker" data-live-search="true" required=''>
+																		<?php 
+																		// Fetch Nomor_order
+																		$no_order_query = "SELECT * FROM tb_order";
+																		$no_order_data = mysqli_query($koneksi,$no_order_query);
+																		while($row = mysqli_fetch_assoc($no_order_data) ){
+																			
+																			$no_order = $row['no_order'];
+																			
+																			// Option
+																			echo "<option value='".$no_order."' >".$no_order."</option>";
+																		}
+																		?>
+																		</select>
+																<!-- <input type="text" name="no_order" class="form-control" required=""> -->
+															</div>
+															<div class="form-group">
+																<label>KB/SPK</label>
+																<div class="custom-file">
+																	<input type="file" name="kb" class="custom-file-input" id="site-logo" required="" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File </label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BA Renewals</label>
+																<div class="custom-file">
+																	<input type="file" name="ba_ren" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BA DO</label>
+																<div class="custom-file">
+																	<input type="file" name="ba_do" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BASO</label>
+																<div class="custom-file">
+																	<input type="file" name="baso" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BA Penjelasan</label>
+																<div class="custom-file">
+																	<input type="file" name="ba_pen" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>P0-P8</label>
+																<div class="custom-file">
+																	<input type="file" name="po" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>KL/SP/WO</label>
+																<div class="custom-file">
+																	<input type="file" name="kl" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>SPH</label>
+																<div class="custom-file">
+																	<input type="file" name="sph" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>SKM</label>
+																<div class="custom-file">
+																	<input type="file" name="skm" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BAA</label>
+																<div class="custom-file">
+																	<input type="file" name="baa" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BAI</label>
+																<div class="custom-file">
+																	<input type="file" name="bai" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BAUT</label>
+																<div class="custom-file">
+																	<input type="file" name="baut" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BAST</label>
+																<div class="custom-file">
+																	<input type="file" name="bast" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+															<div class="form-group">
+																<label>BARD</label>
+																<div class="custom-file">
+																	<input type="file"name="bard" class="custom-file-input" id="site-logo" accept="Application/Pdf">
+																	<label class="custom-file-label">Choose File</label>
+																</div>
+															</div>
+									                    </div>
+									                    <div class="modal-footer">
+															<button type="submit" class="btn btn-dark">Save</button>
+									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+									                    </div>
+									                </form>
+									            </div>
+									        </div>
+									    </div>
 										<!-- Modal End -->
 									</td>
 								</tr>
@@ -492,7 +633,7 @@
 <script></script>
 <script>
 
-	// Custom File Value 
+	// Checklist Box Delete Check
 	$(".custom-file-input").on("change", function() {
 	var fileName = $(this).val().split("\\").pop();
 	$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -502,8 +643,6 @@
         $(this).parents('#basic-datatables1:eq(0)').
         find(':checkbox').attr('checked', this.checked);
     });
-
-	// Hapus Menggunakan Checklist
     $(function() {
         $("#btnhapus").click(function() {
             id_array = new Array();
@@ -530,7 +669,7 @@
         })
     });
 
-	// Hapus Per Record
+	// Delete Record By id
 	function hapus(id) {
 		$.ajax({
 			type: 'POST',
@@ -559,7 +698,7 @@
 			});
 		}
 
-	// Add Data
+	// Add Record
 	$('#form-tambah').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
@@ -590,6 +729,37 @@
                     iziToast.error({
                         title: 'Maaf!',
                         message: 'Data Gagal ditambahkan',
+                        position: 'topRight'
+                    });
+                }
+                //$('#bodyreset').load(location.href + ' #bodyreset');
+            }
+        });
+        return false;
+    });
+
+	// Edit Record
+	$('#form-edit').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url: 'mod_am/crud_am.php?pg=edit',
+			data: $(this).serialize(),
+            success: function(data) {
+                if (data == 'OK') {
+                    iziToast.success({
+                        title: 'Mantap!',
+                        message: 'Data Berhasil diubah',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                    $('#editdata').modal('hide');
+                } else {
+                    iziToast.error({
+                        title: 'Maaf!',
+                        message: 'Data Gagal diubah',
                         position: 'topRight'
                     });
                 }
