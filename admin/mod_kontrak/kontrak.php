@@ -74,6 +74,7 @@
 				                    </div>
 				                    <div class="modal-body">
 				                        <div class="form-group">
+											<div class="alert alert-info">File Yang Dapat Di Upload Adalah File Dengan Ekstensi (.pdf) Dengan Ukuran File Maksimal 1 MB Perkolom</div>
 				                            <label>No Order</label>
 											<select type="text" id="no_order_search" name="no_order" class="form-control selectpicker" data-live-search="true" required=''>
 													<?php 
@@ -204,7 +205,7 @@
 					<!-- Tabel Start -->
 					<div class="table-responsive">
 						<table id="basic-datatables1" class="display table table-striped table-hover" >
-							<thead align="center">
+							<thead>
 								<tr>
 									<th><input type='checkbox' id='ceksemua'></th>
 									<th>#</th>
@@ -223,10 +224,10 @@
 									<th>BAUT</th>
 									<th>BAST</th>
 									<th>BARD</th>
-									<th>Aksi</th>
+									<th width="150px">Aksi</th>
 								</tr>
 							</thead>
-							<tbody align="center">
+							<tbody>
 								<?php
 		                            $query = mysqli_query($koneksi, "select * from tb_kontrak");
 		                            $no = 0;
@@ -732,10 +733,11 @@
 										</div>
 										<!-- Modal End -->
 									<td>
-										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"></i>Edit</button>
-										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($kontrak['id_kontrak']) ?>')" >Hapus</button>
-
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>"><i class="fas fa-info-circle"></i></button>
+											<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"><i class="fas fa-edit"></i></button>
+											<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($kontrak['id_kontrak']) ?>')" ><i class="fas fa-trash"></i></button>
+										</div>
 										<!-- Modal  Details Start -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($kontrak['id_kontrak']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">

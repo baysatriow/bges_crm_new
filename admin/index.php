@@ -222,6 +222,8 @@ if (isset($_SESSION['id_user'])) {
 	<script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 	<!-- Datatables -->
 	<script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="../assets/js/plugin/jquery.magnific-popup/jquery.magnific-popup.min.js"></script>
 	<!-- Atlantis JS -->
 	<script src="../assets/js/atlantis.min.js"></script>
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
@@ -289,6 +291,25 @@ if (isset($_SESSION['id_user'])) {
 				$('#addRowModal').modal('hide');
 
 			});
+		});
+		
+		// POP IMAGE
+		$('.image-gallery').magnificPopup({
+			delegate: 'a', 
+			type: 'image',
+			removalDelay: 300,
+			gallery:{
+				enabled:false,
+			},
+			mainClass: 'mfp-with-zoom', 
+			zoom: {
+				enabled: true, 
+				duration: 300,
+				easing: 'ease-in-out',
+				opener: function(openerElement) {
+					return openerElement.is('img') ? openerElement : openerElement.find('img');
+				}
+			}
 		});
 	</script>
 </body>

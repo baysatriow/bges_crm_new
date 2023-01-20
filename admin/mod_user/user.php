@@ -148,11 +148,18 @@
 									<td><?= $user['username'] ?></td>
 									<td><?= $user['phone'] ?></td>
 									<td><?= $user['Roles'] ?></td>
-									<td><img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail" width="100px"></td>
+									<!-- <td><img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="<?= $user['nama'] ?>" class="img-thumbnail" width="100px"></td> -->
+									<td>
+										<div class="image-gallery">
+											<a href="../assets/uploaded/profile/<?= $user['photo'] ?>" class="col-6 col-md-3 mb-4">
+												<img src="../assets/uploaded/profile/<?= $user['photo'] ?>" class="img-thumbnail" width="100px">
+											</a>
+										</div>
+									</td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($user['id_user']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata"><i class="fas fa-plus-square"></i> Edit</button>
-										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($user['id_user']) ?>')" >Hapus</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-edit<?= $no ?>"><i class="fas fa-plus-square"></i> Edit</button>
+										<button type='button' class='hapus btn btn-danger btn-xs'  data-id="<?= $user['id_user'] ?>" >Hapus</button>
 										
 										<!-- Modal Details Start-->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?= enkripsi($user['id_user']) ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -192,7 +199,7 @@
 															<div class="form-group align-items-center">
 																<label class="form-control-label">Photo</label>
 																<div>
-																	<img src="../assets/img/uploaded/profile/<?= $user['photo'] ?>" class="img-thumbnail" width="500">
+																<img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail" width="100px">
 																</div>
 															</div>
 									                    </div>
@@ -206,12 +213,12 @@
 										<!-- Modal Details End-->
 										
 										<!-- Modal Edit Start -->
-										<div class="modal fade" id="editdata" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade" id="modal-edit<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
-													<form id="form-edit" enctype='multipart/form-data'>
+													<form id="form-edit<?= $no ?>" enctype='multipart/form-data'>
 														<div class="modal-header">
-															<h5 class="modal-title">Tambah Data User</h5>
+															<h5 class="modal-title">Edit Data User</h5>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
@@ -219,6 +226,7 @@
 														<div class="modal-body">
 															<div class="form-group">
 																<label>Nama</label>
+																<input type="hidden" name="id_user" class="form-control" value="<?= $user['id_user'] ?>">
 																<input type="text" name="nama" class="form-control" value="<?= $user['nama'] ?>">
 															</div>
 															<div class="form-group">
@@ -244,8 +252,23 @@
 																</select>
 															</div>
 															<div class="form-group">
-												
-														</div>
+																<label>Password Baru</label>
+																<input type="password" name="password_baru" class="form-control">
+															</div>
+															
+															<div class="form-group align-items-center">
+																<label class="form-control-label">Photo</label>
+																
+																<div>
+																	<img src="../assets/uploaded/profile/<?= $user['photo'] ?>" alt="Profile" class="img-thumbnail" width="100px">
+																</div>
+																<div class="form-group">
+																<div class="custom-file">
+																	<input type="file" name="profile" class="custom-file-input" id="customFile">
+																	<label class="custom-file-label" for="customFile">Choose file</label>
+																</div>
+																</div>
+															</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 															<button type="submit" class="btn btn-dark">Save</button>
@@ -255,6 +278,47 @@
 											</div>
 										</div>
 										<!-- Modal Edit Ends -->
+										<!-- Edit Script Start -->
+										<script>
+											$('#form-edit<?= $no ?>').submit(function(e) {
+												e.preventDefault();
+												$.ajax({
+													type: 'POST',
+													url: 'mod_user/crud_user.php?pg=edit',
+													data: new FormData(this),
+													processData: false,
+													contentType: false,
+													cache: false,
+													beforeSend: function() {
+														$('#btnsimpan').prop('disabled', true);
+													},
+													success: function(data) {
+														var json = data;
+														$('#btnsimpan').prop('disabled', false);
+														if (json == 'ok') {
+															iziToast.success({
+																title: 'Terima Kasih!',
+																message: 'Data berhasil disimpan',
+																position: 'topCenter'
+															});
+
+														} else if (json == 'ukuran'){
+															iziToast.warning({
+																title: 'Maaf',
+																message: 'Ukuran Data Terlalu Besar',
+																position: 'topCenter'
+															});
+														}
+														setTimeout(function() {
+															window.location.reload();
+														}, 2000);
+														//$('#bodyreset').load(location.href + ' #bodyreset');
+													}
+												});
+												return false;
+											});
+										</script>
+										<!-- Script End -->
 									</td>
 								</tr>
 								<?php } ?>
@@ -309,33 +373,64 @@
     });
 
 	// Delete Record By id
-	function hapus(id) {
-		$.ajax({
-			type: 'POST',
-			data: 'id='+id,
-			url: 'mod_user/crud_user.php?pg=hapus',
-			success: function(data) {
-                if (data == 'OK') {
-                    iziToast.success({
-                        title: 'Mantap!',
-                        message: 'Data Berhasil di Hapus',
-                        position: 'topRight'
-                    });
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 2000);
-                    $('#tambahdata').modal('hide');
-                } else {
-                    iziToast.error({
-                        title: 'Maaf!',
-                        message: 'Data Gagal dihapus',
-                        position: 'topRight'
-                    });
-                }
-                //$('#bodyreset').load(location.href + ' #bodyreset');
+	// function hapus(id) {
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		data: 'id='+id,
+	// 		url: 'mod_user/crud_user.php?pg=hapus',
+	// 		success: function(data) {
+    //             if (data == 'OK') {
+    //                 iziToast.success({
+    //                     title: 'Mantap!',
+    //                     message: 'Data Berhasil di Hapus',
+    //                     position: 'topRight'
+    //                 });
+    //                 setTimeout(function() {
+    //                     window.location.reload();
+    //                 }, 2000);
+               
+    //             } else {
+    //                 iziToast.error({
+    //                     title: 'Maaf!',
+    //                     message: 'Data Gagal dihapus',
+    //                     position: 'topRight'
+    //                 });
+    //             }
+    //             //$('#bodyreset').load(location.href + ' #bodyreset');
+    //         }
+	// 		});
+	// 	}
+
+		$('#basic-datatables1').on('click', '.hapus', function() {
+        var id = $(this).data('id');
+        console.log(id);
+        swal({
+            title: 'Are you sure?',
+            text: 'Akan menghapus data ini!',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((result) => {
+            if (result) {
+                $.ajax({
+                    url: 'mod_user/crud_user.php?pg=hapus',
+                    method: "POST",
+                    data: 'id_user=' + id,
+                    success: function(data) {
+                        iziToast.error({
+                            title: 'Success',
+                            message: 'Data Berhasil dihapus',
+                            position: 'topRight'
+                        });
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
             }
-			});
-		}
+        })
+
+    });
 
 	// Add Data
 	$('#form-tambah').on('submit', function(e) {

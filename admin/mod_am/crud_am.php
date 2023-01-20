@@ -9,15 +9,17 @@ if (!isset($_SESSION['id_user'])) {
 }
 if ($pg == 'edit') {
 
-    $id=$_POST['id_am'];
-
+    $where = [
+        'id_am' => $_POST['id_am'],
+    ];
     $data = [
         'nama_am'          => $_POST['nama_am'],
         'nik'              => $_POST['nik'],
-        'segmen'           => $_POST['segmen'],
+        'segmen'           => $_POST['segmen']
     ];
-    $exec = update($koneksi, 'tb_am', $data, ['id_am' => $id]);
+    $exec = update($koneksi, 'tb_am', $data, $where);
     echo $exec;
+    // echo $data;
 }
 
 if ($pg == 'tambah') {

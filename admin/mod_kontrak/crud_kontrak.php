@@ -132,42 +132,10 @@ if  ($pg == 'tambah'){
         $file_tmp14=$_FILES['bard']['tmp_name'];
         $ukuran14 = $_FILES['bard']['size'];
 
-        $allsize = [
-            $ukuran1,
-            $ukuran2,
-            $ukuran3,
-            $ukuran4,
-            $ukuran5,
-            $ukuran6,
-            $ukuran7,
-            $ukuran8,
-            $ukuran9,
-            $ukuran10,
-            $ukuran11,
-            $ukuran12,
-            $ukuran13,
-            $ukuran14,
-        ];
-        $allext = [
-            $file1,
-            $file2,
-            $file3,
-            $file4,
-            $file5,
-            $file6,
-            $file7,
-            $file8,
-            $file9,
-            $file10,
-            $file11,
-            $file12,
-            $file13,
-            $file14,
-        ];
         $ext = explode('.', $file1);
         $ext = end($ext);
 
-        if ($ukuran1 < 1044070) {
+        if ($ukuran1 & $ukuran2 & $ukuran3 & $ukuran4 & $ukuran5 & $ukuran6 & $ukuran7 & $ukuran8 & $ukuran9 & $ukuran10 & $ukuran11 & $ukuran12 & $ukuran13 & $ukuran14< 1044070) {
             if (in_array($ext, $ektensi)) {
 
                 $location1='assets/uploaded/files/kb/' . $file1;
@@ -185,7 +153,7 @@ if  ($pg == 'tambah'){
                 $location13='assets/uploaded/files/bast/' . $file13;
                 $location14='assets/uploaded/files/bard/' . $file14;
 
-                $dest = 'assets/uploaded/files/' . $file1;
+                // $dest = 'assets/uploaded/files/' . $file1;
                 $data2 = [
                     'no_order'      => $_POST['no_order'],
                     'kb'            => $file1,

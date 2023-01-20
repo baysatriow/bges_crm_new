@@ -9,50 +9,71 @@ if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
 // Edit Data
-if ($pg == 'ubah') {
-    $data = [
-        'nama'          => $_POST['nama'],
-        'email'         => $_POST['email'],
-        'username'      => $_POST['username'],
-        'phone'         => $_POST['phone'],
-        'level'         => $_POST['Roles'],
-        'Roles'         => $_POST['Roles'],
-    ];
+if ($pg == 'edit') {
+    $id = $_POST['id_user'];
+
+    if ($_POST['password_baru'] <> "") {
+        $data = [
+            'nama'          => $_POST['nama'],
+            'email'         => $_POST['email'],
+            'username'      => $_POST['username'],
+            'phone'         => $_POST['phone'],
+            'level'         => strtolower($_POST['Roles']),
+            'Roles'         => $_POST['Roles'],
+            'password'      => password_hash($_POST['password_baru'], PASSWORD_DEFAULT),
+        ];
+    } else {
+        $data = [
+            'nama'          => $_POST['nama'],
+            'email'         => $_POST['email'],
+            'username'      => $_POST['username'],
+            'phone'         => $_POST['phone'],
+            'level'         => $_POST['Roles'],
+            'Roles'         => $_POST['Roles'],
+        ];
+    }
+
+
+
     $where = [
-        'username' => $_POST['username'],
+        // 'username' => $_POST['username'],
+        'id_user' => $id,
     ];
+    
     $exec = update($koneksi, 'tb_user', $data, $where);
     echo mysqli_error($koneksi);
+
     if ($exec) {
         $ektensi = ['jpg', 'png'];
         if ($_FILES['profile']['name'] <> '') {
             $profile = $_FILES['profile']['name'];
             $temp = $_FILES['profile']['tmp_name'];
+            $ukuran = $_FILES['profile']['size'];
             $ext = explode('.', $profile);
             $ext = end($ext);
-            if (in_array($ext, $ektensi)) {
-                $dest = "assets/uploaded/profile/".$profile;
-                $upload = move_uploaded_file($temp, '../../' . $dest);
-                if ($upload) {
-                    $data2 = [
-                        'profile' => $dest
-                    ];
-                    $exec = update($koneksi, 'tb_user', $data2, $where);
-                } else {
-                    echo "gagal";
+
+            if($ukuran < 1044070) {
+                if (in_array($ext, $ektensi)) {
+                    $dest = 'assets/uploaded/profile/' . $profile;
+                    $upload = move_uploaded_file($temp, '../../' . $dest);
+                    if ($upload) {
+                        $data2 = [
+                            'photo' => $profile
+                        ];
+                        $exec = update($koneksi, 'tb_user', $data2, $where);
+                        if($exec){
+                            
+                        }
+                    } else {
+                        echo "gagal";
+                    }
                 }
+                
+            }else{
+                echo "ukuran";
             }
+            
         }
-        // if ($_FILES['ttd']['name'] <> '') {
-        //     $logo = $_FILES['ttd']['name'];
-        //     $temp = $_FILES['ttd']['tmp_name'];
-        //     $ext = explode('.', $logo);
-        //     $ext = end($ext);
-        //     if (in_array($ext, $ektensi)) {
-        //         $dest = 'dist/img/ttd' . '.' . $ext;
-        //         $upload = move_uploaded_file($temp, '../' . $dest);
-        //     }
-        // }
     } else {
         echo "Gagal menyimpan";
     }
@@ -67,7 +88,7 @@ if ($pg == 'tambah_aja') {
         'username'      => $_POST['username'],
         'password'      => password_hash($_POST['password'],PASSWORD_DEFAULT),
         'phone'         => $_POST['phone'],
-        'level'         => $_POST['Roles'],
+        'level'         => strtolower($_POST['Roles']),
         'Roles'         => $_POST['Roles'],
         'photo'         => $_FILES['profile']['name'],
     ];
@@ -111,7 +132,7 @@ if ($pg == 'tambah_aja') {
 // Hapus Per Record
 if ($pg == 'hapus') {
 
-    $id=$_POST['id'];
+    $id=$_POST['id_user'];
     // $hapus = mysql_query("delete from tb_am where id=".$id." ");
     $query = mysqli_query($koneksi, "DELETE from tb_user where id_user=".$id." ");
     if($query) {

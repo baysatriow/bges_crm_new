@@ -105,18 +105,18 @@
 				<div class="card-body">
 					<!-- Tabel Start -->
 					<div class="table-responsive">
-						<table id="basic-datatables" class="display table table-striped table-hover" >
-							<thead>
+						<table id="basic-datatables1" class="display table table-striped table-hover" >
+							<thead align="center">
 								<tr>
 									<th><input type='checkbox' id='ceksemua'></th>
 									<th>#</th>
 									<th>Nama AM</th>
 									<th>NIK</th>
 									<th>Segmen</th>
-									<th>Aksi</th>
+									<th width="150px">Aksi</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody align="center">
 								<?php
 		                            $query = mysqli_query($koneksi, "select * from tb_am");
 		                            $no = 0;
@@ -128,10 +128,10 @@
 									<td><?= $no; ?></td>
 									<td><?= $am['nama_am'] ?></td>
 									<td><?= $am['nik'] ?></td>
-									<td><?= $am['segmen'] ?></td>
+									<td ><?=$am['segmen'] ?></td>
 									<td>
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($am['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editdata  id_am=<?= $am['id_am'] ?>"></i>Edit</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal-edit<?= $no ?>"></i>Edit</button>
 										<button type='button' class='btn btn-danger btn-xs' id='hapus' onclick="hapus('<?=($am['id_am']) ?>')" >Hapus</button>
 										<!-- Modal Details Here -->
 										<div class="modal fade bd-example-modal-lg" id="detail&id=<?=$am['id_am'] ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -170,13 +170,13 @@
 										<!-- Modal End -->
 
 										<!-- Modal Edit Here -->
-										<div class="modal fade bd-example-modal-lg" id="editdata id_am=<?= $am['id_am'] ?> " tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+										<div class="modal fade bd-example-modal-lg" id="modal-edit<?= $no ?>" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
 									        <div class="modal-dialog" role="document">
 									            <div class="modal-content">
 									            	<!-- Desc -->
 									            	
-									                <form id="form-edit">
-									                    <div class="modal-header">
+									                <form id="form-edit<?= $no ?>">
+									                    <div class="modal-header" >
 									                        <h5 class="modal-title"><i class="fas fa-info-circle"></i> Edit AM <b><?= $am['nama_am'] ?></b></h5>
 									                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									                            <span aria-hidden="true">&times;</span>
@@ -198,7 +198,7 @@
 									                        </div>
 									                    </div>
 									                    <div class="modal-footer">
-															<button type="submit" class="btn btn-dark">Save</button>
+															<button type="submit" class="btn btn-dark" id="btnsimpan">Save</button>
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>
 									                </form>
@@ -206,6 +206,47 @@
 									        </div>
 									    </div>
 										<!-- Modal End -->
+										<!-- Edit Script Start -->
+										<script>
+											$('#form-edit<?= $no ?>').submit(function(e) {
+												e.preventDefault();
+												$.ajax({
+													type: 'POST',
+													url: 'mod_am/crud_am.php?pg=edit',
+													data: new FormData(this),
+													processData: false,
+													contentType: false,
+													cache: false,
+													beforeSend: function() {
+														$('#btnsimpan').prop('disabled', true);
+													},
+													success: function(data) {
+														var json = data;
+														$('#btnsimpan').prop('disabled', false);
+														if (json == 'ok') {
+															iziToast.success({
+																title: 'Terima Kasih!',
+																message: 'Data berhasil disimpan',
+																position: 'topCenter'
+															});
+
+														} else {
+															iziToast.info({
+																title: 'Sukses',
+																message: 'Data berhasil disimpan',
+																position: 'topCenter'
+															});
+														}
+														setTimeout(function() {
+															window.location.reload();
+														}, 2000);
+														//$('#bodyreset').load(location.href + ' #bodyreset');
+													}
+												});
+												return false;
+											});
+										</script>
+										<!-- Script End -->
 									</td>
 								</tr>
 								<?php } ?>
@@ -315,35 +356,7 @@
     });
 
 	// Edit
-	$('#form-edit').submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-            type:'POST',
-            url: 'mod_am/crud_am.php?pg=edit',
-			data: $(this).serialize(),
-            success: function(data) {
-                if (data == 'OK') {
-                    iziToast.success({
-                        title: 'Mantap!',
-                        message: 'Data Berhasil diubah',
-                        position: 'topRight'
-                    });
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 2000);
-                    $('#editdata').modal('hide');
-                } else {
-                    iziToast.error({
-                        title: 'Maaf!',
-                        message: 'Data Gagal diubah',
-                        position: 'topRight'
-                    });
-                }
-                //$('#bodyreset').load(location.href + ' #bodyreset');
-            }
-        });
-        return false;
-    });
+	
 
 </script>
 <!-- End -->

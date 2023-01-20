@@ -19,6 +19,6 @@
 		</ul>
 	</nav> -->
 	<div class="copyright ml-auto">
-		2022 <i class="fa fa-heart heart text-danger"></i> by <a href="http://baysatriow.me" target="_blank">Baysatriow.me</a>
+	BGES Witel Lampung &#169; 2022 <i class="fa fa-heart heart text-danger"></i> by <a href="http://baysatriow.me" target="_blank">G IT Dev</a>
 	</div>				
 </div>

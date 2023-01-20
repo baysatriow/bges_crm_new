@@ -207,7 +207,7 @@
 					<!-- Tabel Start -->
 					<div class="table-responsive">
 						<table id="basic-datatables1" class="display table table-striped table-hover" >
-							<thead>
+							<thead align="center">
 								<tr>
 									<th><input type='checkbox' id='ceksemua'></th>
 									<th>#</th>
@@ -237,7 +237,7 @@
 									<th>Aksi</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody align="center">
 								<?php
 		                            $query = mysqli_query($koneksi, "SELECT * FROM tb_order INNER JOIN tb_pelanggan ON tb_order.no_order=tb_pelanggan.nomor_order INNER JOIN tb_am ON tb_order.nama_am=tb_am.nama_am");
 		                            $no = 0;
@@ -247,7 +247,7 @@
 								<tr>
 									<td><input type='checkbox' name='cekpilih[]' class='cekpilih' id='cekpilih-<?= $no ?>' value="<?= $order['id_order'] ?>"></td>
 									<td><?= $no; ?></td>
-									<td><?= $order['tgl_input'] ?></td>
+									<td style="white-space:nowrap"><?= $order['tgl_input'] ?></td>
 									<td><?= $order['segmen'] ?></td>
 									<td><?= $order['nama_am'] ?></td>
 									<td><?= $order['nama_pel'] ?></td>
@@ -255,16 +255,16 @@
 									<td><?= $order['hrg_otc'] ?></td>
 									<td><?= $order['hrg_mountly'] ?></td>
 									<td><?= $order['status_lyn'] ?></td>
-									<td><?= $order['ca'] ?></td>
-									<td><?= $order['ca_site'] ?></td>
-									<td><?= $order['ca_nipnas'] ?></td>
-									<td><?= $order['ba'] ?></td>
-									<td><?= $order['ba_site'] ?></td>
-									<td><?= $order['nomor_quote'] ?></td>
-									<td><?= $order['nomor_aggre'] ?></td>
-									<td><?= $order['nomor_order'] ?></td>
+									<td style="white-space:nowrap"><?= $order['ca'] ?></td>
+									<td style="white-space:nowrap"><?= $order['ca_site'] ?></td>
+									<td style="white-space:nowrap"><?= $order['ca_nipnas'] ?></td>
+									<td style="white-space:nowrap"><?= $order['ba'] ?></td>
+									<td style="white-space:nowrap"><?= $order['ba_site'] ?></td>
+									<td style="white-space:nowrap"><?= $order['nomor_quote'] ?></td>
+									<td style="white-space:nowrap"><?= $order['nomor_aggre'] ?></td>
+									<td style="white-space:nowrap"><?= $order['nomor_order'] ?></td>
 									<td><?= $order['status_order'] ?></td>
-									<td><?= $order['date_end'] ?></td>
+									<td style="white-space:nowrap"><?= $order['date_end'] ?></td>
 									<td>
                                                                                     
 									<?php
@@ -302,11 +302,11 @@
 																				?>
 										
 									</td>
-									<td><?= $order['date_prov'] ?></td>
+									<td style="white-space:nowrap"><?= $order['date_prov'] ?></td>
 									<td><?= $order['order_lama'] ?></td>
 									<td><?= $order['sid'] ?></td>
 									<td><?= $order['ket'] ?></td>
-									<td>
+									<td style="white-space:nowrap">
 										<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detail&id=<?= enkripsi($order['id_am']) ?>"><i class="fas fa-info-circle"></i></button>
 										<button class="btn btn-dark btn-xs" data-toggle="modal" data-target="#editdata&id=<?= enkripsi($order['id_am']) ?>"></i>Edit</button>
 										<button type="button" id="btnhapus" class="btn btn-dark btn-xs"><i class="fas fa-trash    "></i> Hapus</button>
@@ -324,19 +324,95 @@
 									                        </button>
 									                    </div>
 									                    <div class="modal-body">
-									                        <div class="form-group">
-									                            <label>Nama</label>
-									                            <input type="text" name="nama_am" class="form-control" value="<?= $order['nama_am'] ?>" readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>NIK</label>
-									                            <input type="number" name="nik" class="form-control" value="<?= $order['nik'] ?>"readonly>
-									                        </div>
-									                        <div class="form-group">
-									                            <label>Segmen</label>
-									                            <input type="text" name="segmen" class="form-control" value="<?= $order['segmen'] ?>"readonly>
-									                        </div>
-									                    </div>
+															<div class="form-group">
+																<label>Tanggal Input</label>
+																<input type="date" name="tgl_input" class="form-control" value="<?= $order['tgl_input'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Segmen</label>
+																<input type="number" name="segmen" class="form-control" value="<?= $order['segmen'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nama AM</label>
+																<input type="text" name="nama_am" class="form-control" value="<?= $order['nama_am'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nama Pelanggan</label>
+																<input type="text" name="nama_pel" class="form-control" value="<?= $order['nama_pel'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Layanan</label>
+																<input type="text" name="layanan" class="form-control" value="<?= $order['layanan'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Harga OTC</label>
+																<input type="text" name="hrg_otc" class="form-control" value="<?= $order['hrg_otc'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Harga Monthly</label>
+																<input type="text" name="hrg_otc" class="form-control" value="<?= $order['hrg_mountly'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Status Layanan</label>
+																<input type="text" name="status_lyn" class="form-control" value="<?= $order['status_lyn'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Customer Account</label>
+																<input type="text" name="ca" class="form-control" value="<?= $order['ca'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Customer Account Site</label>
+																<input type="text" name="ca_site" class="form-control" value="<?= $order['ca_site'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Customer Account Nipnas</label>
+																<input type="text" name="ca_nipnas" class="form-control" value="<?= $order['ca_nipnas'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Billing Account</label>
+																<input type="text" name="ba" class="form-control" value="<?= $order['ba'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Billing Account Site</label>
+																<input type="text" name="ba_site" class="form-control" value="<?= $order['ba_site'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nomor Quote</label>
+																<input type="text" name="nomor_quote" class="form-control" value="<?= $order['nomor_quote'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nomor Aggrement</label>
+																<input type="text" name="nomor_aggrement" class="form-control" value="<?= $order['nomor_aggre'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nomor Order</label>
+																<input type="text" name="no_order" class="form-control" value="<?= $order['no_order'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Status Order</label>
+																<input type="text" name="status_order" class="form-control" value="<?= $order['status_order'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Date End Of Contract</label>
+																<input type="date" name="date_end" class="form-control" value="<?= $order['date_end'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Date Prov Of Contract</label>
+																<input type="date" name="date_prov" class="form-control" value="<?= $order['date_prov'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Nomor Order Lama</label>
+																<input type="text" name="order_lama"  class="form-control" value="<?= $order['order_lama'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Sid</label>
+																<input type="text" name="sid" class="form-control" value="<?= $order['sid'] ?>" readonly>
+															</div>
+															<div class="form-group">
+																<label>Keterangan</label>
+																<input type="text" name="ket" class="form-control" value="<?= $order['ket'] ?>" readonly>
+															</div>
+														</div>
 									                    <div class="modal-footer">
 									                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 									                    </div>

@@ -6,34 +6,57 @@ session_start();
 if (!isset($_SESSION['id_user'])) {
     die('Anda tidak diijinkan mengakses langsung');
 }
+
+// $query = mysqli_query($koneksi, "select * from tb_user where id_user='$id'");
+// $user = mysqli_fetch_array($query);
+
 if ($pg == 'ubah') {
-  
-    // $query = mysqli_query($koneksi, "select * from tb_user where id_user='$id'");
-    // $user = mysqli_fetch_array($query);
+
+    if ($_POST['password_baru'] <> "") {
+        $data = [
+            'nama'          => $_POST['nama'],
+            'username'      => $_POST['username'],
+            'email'         => $_POST['email'],
+            'phone'         => $_POST['phone'],
+            'password'      => password_hash($_POST['password_baru'], PASSWORD_DEFAULT),
+        ];
+    } else {
+        $data = [
+            'nama'          => $_POST['nama'],
+            'username'      => $_POST['username'],
+            'email'         => $_POST['email'],
+            'phone'         => $_POST['phone'],
+        ];
+    }
+    $id_user = $_POST['id_user'];
+    $exec = update($koneksi, 'tb_user', $data, ['id_user' => $id_user]);
     // $pw_lama = $_POST['password_lama'];
-    // $pw_baru = password_hash($_POST['password_baru'])
-    $id = $_POST['id_user'];;
-    $data = [
-        'nama'          => $_POST['nama'],
-        'username'      => $_POST['username'],
-        'email'         => $_POST['email'],
-        'phone'         => $_POST['phone'],
-    ];
-    $where = [
-        'id_user' => $id,
-    ];
-    $exec = update($koneksi, 'tb_user', $data, $where);
-    echo mysqli_error($koneksi);
+    // $pw_baru = password_hash($_POST['password_baru']);
+    // $id = $_POST['id_user'];
+    // $data = [
+    //     'nama'          => $_POST['nama'],
+    //     'username'      => $_POST['username'],
+    //     'email'         => $_POST['email'],
+    //     'phone'         => $_POST['phone'],
+    // ];
+    // $where = [
+    //     'id_user' => $id,
+    // ];
+    // $exec = update($koneksi, 'tb_user', $data, $where);
+    // echo mysqli_error($koneksi);
 
     // if ($exec) {
-    //     if (!password_verify($pw_lama, $user['password'])){
+    //     if (!password_verify($_POST['password_lama'], $user['password'])){
     //         $data3 = [
-    //             'password'          => password_hash($_POST['password_baru']),
+    //             'password'  => password_hash($_POST['password_baru'],PASSWORD_DEFAULT),
     //         ];
-    //         $exec = update($koneksi, 'tb_user', $data, $where);
+    //         $exec = update($koneksi, 'tb_user', $data3, $where);
+    //     } else {
+    //         echo "PW";
     //     }
     
     // }
+    
     if ($exec) {
         $ektensi = ['jpg', 'png'];
         if ($_FILES['profile']['name'] <> '') {
@@ -60,7 +83,6 @@ if ($pg == 'ubah') {
                     }
                 }
                 
-               
             }else{
                 echo "ukuran";
             }

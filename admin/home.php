@@ -16,7 +16,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-body">
-					Selamat datang <?= $user['nama'] ?> di Sistem Customer Relationship Management (CRM) BGES Telkom Lampung , gunakan menu disamping untuk memulai pekerjaan anda.
+					Selamat datang <?= $user['nama'] ?> di Sistem Customer Relationship Management (CRM) BGES Witel Lampung , gunakan menu disamping untuk memulai pekerjaan anda.
 				</div>
 			</div>
 			<div class="row">

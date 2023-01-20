@@ -75,15 +75,20 @@
 		            <div class="form-group row align-items-center">
 		                <label class="form-control-label col-sm-3 text-md-right">Preview</label>
 		                <div class="col-sm-6 col-md-6">
-		                    <img src="../assets/uploaded/profile/<?= $user_setting['photo'] ?>" alt="Profile" class="img-thumbnail" width="100">
+		                    <!-- <img src="../assets/uploaded/profile/<?= $user_setting['photo'] ?>" alt="Profile" class="img-thumbnail" width="100"> -->
+							<div class="image-gallery">
+											<a href="../assets/uploaded/profile/<?= $user_setting['photo'] ?>" class="col-6 col-md-3 mb-4">
+											<img src="../assets/uploaded/profile/<?= $user_setting['photo'] ?>" alt="Profile" class="img-thumbnail" width="100">
+											</a>
+										</div>
 		                </div>
 		            </div>
-					<div class="form-group row align-items-center">
+					<!-- <div class="form-group row align-items-center">
 		                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Password Lama</label>
 		                <div class="col-sm-6 col-md-9">
-		                    <input type="password" name="password_lama" class="form-control" Value="<?= $user_setting['password'] ?>">
+		                    <input type="password" name="password_lama" class="form-control">
 		                </div>
-		            </div>
+		            </div> -->
 					<div class="form-group row align-items-center">
 		                <label for="site-title" class="form-control-label col-sm-3 text-md-right">Password Baru</label>
 		                <div class="col-sm-6 col-md-9">
@@ -123,13 +128,22 @@
                 });
             },
             success: function(data) {
-                if(data == 'ukuran'){
+                if(data == 'SUKSES'){
 					iziToast.warning({
                         title: 'Maaf!',
                         message: 'Ukuran File Terlalu Besar',
                         position: 'topRight'
                     });
-				}else {
+				}else if (data == 'PW') {
+                    iziToast.info({
+                        title: 'Maaf!',
+                        message: 'Password Lama Salah!!',
+                        position: 'topRight'
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
+                }else{
                     iziToast.info({
                         title: 'Sukses',
                         message: 'Data Berhasil diubah',
