@@ -50,7 +50,7 @@
 	<div class="wrapper wrapper-login wrapper-login-full p-0">
 		<div class="login-aside w-50 d-flex flex-column align-items-center justify-content-center text-center bg-danger-gradient">
 			<h1 class="title fw-bold text-white mb-3">BGES Telkom Lampung</h1>
-			<p class="subtitle text-white op-7">Customer Relation Management</p>
+			<p class="subtitle text-white op-7">Customer Relationship Management</p>
 		</div>
 		<div class="login-aside w-50 d-flex align-items-center justify-content-center bg-white">
 			<div class="container container-login container-transparent animated fadeIn">
