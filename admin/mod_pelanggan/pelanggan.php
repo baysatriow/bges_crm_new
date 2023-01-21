@@ -147,7 +147,7 @@
 						<table id="basic-datatables" class="display table table-striped table-hover" >
 							<thead>
 								<tr>
-									<th><input type='checkbox' id='ceksemua'></th>
+									<!-- <th><input type='checkbox' id='ceksemua'></th> -->
 									<th>#</th>
 									<th>Nama Pelanggan</th>
 									<th>Alamat</th>
@@ -162,6 +162,7 @@
 									<th>Nomor Aggrement</th>
 									<th>Nomor Order</th>
 									<th>Sid</th>
+									<th>Aksi</th>
 								</tr>
 							</thead>
 						</table>
@@ -186,14 +187,21 @@
         find(':checkbox').attr('checked', this.checked);
     });
 
+	// Tampil Data 
 	$(document).ready(function(){
-    $('#basic-datatables').DataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": "mod_pelanggan/fetchData.php"
-		
-    });
-});
+		$('#basic-datatables').DataTable({
+			"processing": true,
+			"serverSide": true,
+			"ajax": "mod_pelanggan/fetchData.php",
+		});
+
+		// table.on('draw.dt', function () {
+		// 		var info = table.page.info();
+		// 		table.column(, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+		// 			cell.innerHTML = i + 1 + info.start;
+		// 		});
+		// 	});
+	});
 	$('#ceksemua').change(function() {
         $(this).parents('#basic-datatables:eq(0)').
         find(':checkbox').attr('checked', this.checked);
