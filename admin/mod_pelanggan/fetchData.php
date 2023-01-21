@@ -1,4 +1,5 @@
 <?php 
+// Test
 // Database connection info 
 $dbDetails = array( 
     'host' => 'localhost', 
